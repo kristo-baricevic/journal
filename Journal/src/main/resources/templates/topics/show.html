@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container body-content">
+<center>
+<div th:replace="fragments :: page-header"></div>
+<h1 th:text="${'Topic Name: ' + topic.name}"></h1>
+<p th:text="${'Topic ID: ' + topic.id}"></p>
+<a th:href="@{/topics/list}">List All Topics</a>
+<br>
+<a th:href="@{/}">Back to Home</a>
+</center>
+</body>
+</html>
+
+

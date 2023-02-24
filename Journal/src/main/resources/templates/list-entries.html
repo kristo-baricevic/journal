@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container body-content">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Topic</th>
+        <th>Journal Entry</th>
+        <th>Mood</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry : ${entries}">
+        <td th:text="${entry.name}"></td>
+        <td th:text="${entry.topic.name}"></td>
+        <td th:text="${entry.journalEntry}"></td>
+        <td th:text="${entry.mood.name}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

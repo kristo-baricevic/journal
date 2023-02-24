@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container body-content">    <meta charset="UTF-8">
+<div align="center">
+    <title>List Entries By Mood</title>
+    <nav th:replace="fragments :: page-header"></nav>
+    <h1> List Entries By Mood </h1>
+    <br/>
+    <table border="1" cellpadding="10">
+        <thead class="">
+        <tr>
+            <th>Mood Name</th>
+            <th>Entries</th>
+        </tr>
+        </thead>
+        <div th:if="${message}" th:text="${message}"></div>
+        <tbody>
+        <th:block th:each="mood: ${moods}">
+            <tr>
+                <td>
+                    <a th:href="@{'/moods/show/' +${mood.id}}" th:text="${mood.name}"></a>
+                </td>
+                <td>
+                    <th:block th:if="${not mood.entries.empty}">
+                        <ul>
+                            <li th:each="entry : ${mood.entries}">
+                                <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.name}"></a>
+                            </li>
+                        </ul>
+                    </th:block>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
+

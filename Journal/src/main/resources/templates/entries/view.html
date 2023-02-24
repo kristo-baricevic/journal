@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+<h1 th:text="${'Entry: ' + journalEntry.name}">Entries</h1>
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<div class="entry-listing">
+    <p th:text="${'Entry: ' + entry.title}"></p>
+    <p> Entries:
+    <ul>
+        <li th:each="entry : ${entries}">
+            <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.title}"></a>
+        </li>
+    </ul>
+    </p>
+</div>

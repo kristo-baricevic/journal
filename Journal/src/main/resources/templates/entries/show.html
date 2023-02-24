@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+
+<body class="container  body-content">
+<div th:replace="fragments :: page-header"></div>
+<h1 th:text="${'Title: ' + entry.title}"></h1>
+<p th:text="${'Entry: ' + entry.journalEntry}"></p>
+<br>
+<a th:href="@{/}">Back to Home</a>
+</body>
+</html>

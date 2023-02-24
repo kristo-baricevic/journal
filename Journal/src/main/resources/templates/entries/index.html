@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container body-content">
+
+<div th:replace="fragments :: page-header"></div>
+
+<p th:unless="${Entry} and ${Entry.size()}">no Entries yet!</p>
+
+<div class="container body-content">
+    <h2>Entries</h2>
+    <ul>
+        <li th:each="Entry : ${Entry}">
+            <a th:href="@{'/entries/view/' + ${Entry.id}}" th:text="${Entry.name}"></a>
+        </li>
+    </ul>
+    <a th:href="@{'/entries/add'}">Add Entry</a>
+
+</div>
+
+</body>
+</html>
