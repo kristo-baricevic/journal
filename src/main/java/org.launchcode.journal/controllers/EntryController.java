@@ -49,7 +49,7 @@ public class EntryController {
 
     @PostMapping("add")
     public String processAddEntryForm(@ModelAttribute @Valid Entry newEntry, Model model,
-                                      Errors errors, @RequestParam int topic_id) {
+                                      Errors errors, @RequestParam int topic_id, @RequestParam int mood_id) {
 
         if (errors.hasErrors()) {
             model.addAttribute(new Entry());
@@ -57,21 +57,20 @@ public class EntryController {
             model.addAttribute("topics", topicRepository.findAll());
             model.addAttribute("moods", moodRepository.findAll());
 
-
-            return "add";
+            return "entries/add";
         }
         Optional<Topic> topic = topicRepository.findById(topic_id);
         if (topic.isPresent()) {
             newEntry.setTopic(topic.get());
         }
 
-        Optional<Mood> mood = moodRepository.findById(topic_id);
+        Optional<Mood> mood = moodRepository.findById(mood_id);
         if (mood.isPresent()) {
             newEntry.setMood(mood.get());
         }
 
         entryRepository.save(newEntry);
-        return "redirect:";
+        return "redirect:/entries/list";
     }
 
     @GetMapping("/edit/{id}")

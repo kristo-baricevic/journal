@@ -42,6 +42,7 @@ public class TopicController {
 
         return "topics/list";
     }
+
     @PostMapping("add")
     public String saveTopic(Topic topic){
         System.out.println(topic);

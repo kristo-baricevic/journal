@@ -6,7 +6,7 @@
 
 <div th:replace="fragments :: page-header"></div>
 <center>
-<h2>Journal Buddy</h2>
+<h2>Journal Entries</h2>
 
 <table class="table-listing">
     <tr th:each="entry : ${entries}">
@@ -17,7 +17,7 @@
                 <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.title}"></a>
             </p>
             <p>
-                Category:
+                Topic:
                 <a th:href="@{'/topics/show/' + ${entry.topic.id}}" th:text="${entry.topic}"></a>
             </p>
             <p th:text="${'Journal Entry: ' + entry.journalEntry}">
