@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container  body-content">
-<h1>Add Skill</h1>
+<body class="container body-content">
 
 <nav th:replace="fragments :: page-header"></nav>
+<center>
+    <h1>Add Journal Entry</h1>
 
-<form method="post" style="max-width:600px;">
-    <div class="form-group">
-        <label th:for="name">Entry</label>
-        <input class="form-control" th:field="${entry.name}" />
-        <span th:errors="${entry.name}" class="error"></span>
-    </div>
+    <form method="post" style="max-width:600px;">
+        <div class="form-group">
+            <label th:for="title">Title</label>
+            <input class="form-control" th:field="${entry.title}" />
 
-    <div class="form-group">
-        <label th:for="entry">Notes</label>
-        <input class="form-control" th:field="${entry.name}" />
-        <span th:errors="${entry.name}" class="error"></span>
-    </div>
+        </div>
 
-    <input type="submit" value="Add Entry" />
-</form>
+        <div class="form-group">
+            <label th:for="topic">Topics</label>
+            <select name="topic_id">
+                <option th:each="topic : ${topics}"
+                        th:text="${topic.name}"
+                        th:value="${topic.id}"></option>
+            </select>
+            <a th:href="@{'/topics/add'}">Add Topic</a>
+        </div>
 
+        <div class="form-group">
+            <label th:for="Entry">What would you like to write about?</label>
+            <textarea class="form-control" rows="20" cols="100" th:field="${entry.journalEntry}" />
+            <span th:errors="${entry.journalEntry}" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label th:for="mood">Moods</label>
+            <select name="mood_id">
+                <option th:each="mood : ${moods}"
+                        th:text="${mood.name}"
+                        th:value="${mood.id}"></option>
+            </select>
+            <a th:href="@{'/moods/add'}">Add Mood</a>
+        </div>
+
+        <input type="submit" value="Add Product" />
+    </form>
+</center>
 </body>
 </html>
