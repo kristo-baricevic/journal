@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+<div th:replace="fragments :: page-header"></div>
+<center>
+<h1>Edit Mood</h1>
+
+<form th:action="@{/moods/edit/{id}(id=${mood.id})}" method="post" style="max-width:600px;">
+  <div class="form-group">
+    <label th:for="name">Mood Name</label>
+    <input class="form-control" th:value="${mood.name}" name="name" />
+    <span th:errors="${mood.name}" class="error"></span>
+  </div>
+
+  <input type="submit" value="Edit Mood" />
+</form>
+</center>
+</body>
+</html>

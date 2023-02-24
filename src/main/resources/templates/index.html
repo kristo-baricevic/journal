@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container body-content">
+
+<div th:replace="fragments :: page-header"></div>
+<center>
+<h2>Journal Buddy</h2>
+
+<table class="table-listing">
+    <tr th:each="entry : ${entries}">
+        <td>
+            <p th:text="${'Entry Id: ' + entry.id}"></p>
+            <p>
+                Name:
+                <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.title}"></a>
+            </p>
+            <p>
+                Category:
+                <a th:href="@{'/topics/show/' + ${entry.topic.id}}" th:text="${entry.topic}"></a>
+            </p>
+            <p th:text="${'Journal Entry: ' + entry.journalEntry}">
+            </p>
+            <p th:text="${'Mood: ' + entry.mood}"></p>
+        </td>
+
+    </tr>
+</table>
+</center>
+</body>
+</html>

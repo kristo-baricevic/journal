@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+<div th:replace="fragments :: page-header"></div>
+<center>
+  <h1>Edit Entry</h1>
+
+  <form th:action="@{/edit/{id}(id=${entry.id})}" method="post" style="max-width:600px;">
+    <div class="form-group">
+      <label th:for="title">Entry Title</label>
+      <input class="form-control" th:value="${entry.title}" name="title" />
+      <span th:errors="${entry.title}" class="error"></span>
+    </div>
+
+    <input type="submit" value="Edit Entry" />
+  </form>
+</center>
+</body>
+</html>

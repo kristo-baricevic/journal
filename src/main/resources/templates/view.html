@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container  body-content">
+
+<nav th:replace="fragments :: page-header"></nav>
+<h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+
+<div class="entry-listing">
+    <p th:text="${'Title: ' + entry.title}"></p>
+    <p>
+        Topic:
+        <a th:href="@{'/topics/show/' + ${entry.topic.id}}" th:text="${entry.topic}"></a>
+    </p>
+    <p th:text="${'Mood: ' + entry.mood}"></p>
+    <p>
+        Mood:
+        <a th:href="@{'/moods/show/' + ${entry.mood.id}}" th:text="${entry.mood}"></a>
+    </p>
+    <p th:text="${'Journal Entry: ' + entry.journalEntry}"></p>
+</div>
+
+</body>
+</html>
+

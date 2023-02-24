@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container body-content">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+    <h2 class = "centered">View Entries</h2>
+</div>
+
+<table class="centeredTable">
+    <tr>
+        <th>Title</th>
+        <th>Topic</th>
+        <th>Mood</th>
+    </tr>
+
+    <tr>
+        <td>
+            <li th:each="entry : ${entries}">
+                <a th:href="@{'/entries/show/' + ${entry.id}}" th:text="${entry.title}"></a>
+            </li>
+        </td>
+        <td>
+            <li th:each="topic : ${topics}">
+                <a th:href="@{'/topics/show/' + ${topic.id}}" th:text="${topic.name}"></a>
+            </li>
+        </td>
+        <td>
+            <li th:each="mood : ${moods}">
+                <a th:href="@{'/moods/show/' +${mood.id}}" th:text="${mood.name}"></a>
+            </li>
+        </td>
+<!--        <td>-->
+<!--            <li th:each="entry : ${entries}">-->
+<!--                <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.journalEntry}"></a>-->
+<!--            </li>-->
+<!--        </td>-->
+    </tr>
+</table>
+</body>
+</html>
