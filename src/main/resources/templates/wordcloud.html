@@ -31,19 +31,21 @@
         function generate_word_cloud(entries) {
             // Make AJAX request to server
             $.ajax({
-                url: '/wordcloud',
-                method: 'POST',
-                data: JSON.stringify({entryIds: entries}),
-                contentType: 'application/json',
-                success: function(response) {
-                    // Display word cloud image
-                    $('#word_cloud_image').attr('src', 'data:image/png;base64,' + response.image);
-                    $('#word_cloud_image_container').show();
-                },
-                error: function() {
-                    alert('Error generating word cloud');
-                }
-            });
+              url: '/wordcloud',
+              method: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify(entries),
+              success: function(response) {
+
+          // Display word cloud image
+
+              $('#word_cloud_image').attr('src', 'data:image/png;base64,' + response.image);
+              $('#word_cloud_image_container').show();
+              },
+            error: function() {
+            alert('Error generating word cloud');
+    }
+});
         }
     });
 </script>
@@ -60,7 +62,7 @@
 </form>
 <div id="word_cloud_image_container" style="display:none">
   <h2>Word Cloud</h2>
-  <img id="word_cloud_image">
+  <img id="word_cloud_image" width="600" height="400">
 </div>
 </body>
 </html>

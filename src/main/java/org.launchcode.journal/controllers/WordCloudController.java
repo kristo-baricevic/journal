@@ -82,12 +82,20 @@ WordCloudController {
             System.out.println(entry);
         }
 
-        for (Entry entry : entries) {
-            System.out.println(entry.getJournalEntry());
+        //save the file before passing it to the analyzer
+        String filePath = "src/main/resources/static/wordcloud.txt"; // Replace with the path where you want to save the file
+        try {
+            FileWriter writer = new FileWriter(filePath);
+            writer.write(text);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         // Generate word frequencies from the text
-        ArrayList<WordFrequency> frequencies = (ArrayList<WordFrequency>) frequencyAnalyzer.load(text);
+        ArrayList<WordFrequency> frequencies = (ArrayList<WordFrequency>) frequencyAnalyzer.load(filePath);
+
+        System.out.println(frequencies);
 
         // Create a WordCloud object
         WordCloud wordCloud = new WordCloud(new Dimension(600, 400), CollisionMode.PIXEL_PERFECT);
@@ -100,24 +108,21 @@ WordCloudController {
         // Get the generated image as a BufferedImage
         BufferedImage bufferedImage = wordCloud.getBufferedImage();
 
+
         // Encode the image as a Base64 string
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bufferedImage, "png", baos);
         baos.flush();
         byte[] imageBytes = baos.toByteArray();
         String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        System.out.println(base64Image);
         baos.close();
+        baos.flush();
 
         // Return the Base64-encoded image as a response
         return ResponseEntity.ok().body("{\"image\": \"" + base64Image + "\"}");
     }
 
-//        // Sort frequencies by count in descending order
-//        frequencies.sort(Comparator.comparingInt(WordFrequency::getFrequency).reversed());
-//
-//        // Pass word frequencies to view
-//        model.addAttribute("frequencies", frequencies);
 
-//        return "wordcloud-generated";
     }
 
