@@ -39,7 +39,7 @@
 
           // Display word cloud image
 
-              $('#word_cloud_image').attr('src', 'data:image/png;base64,' + response.image);
+              $('#word_cloud_image').attr('src', 'data:image/png;base64,' + response);
               $('#word_cloud_image_container').show();
               },
             error: function() {
@@ -62,7 +62,7 @@
 </form>
 <div id="word_cloud_image_container" style="display:none">
   <h2>Word Cloud</h2>
-  <img id="word_cloud_image" width="600" height="400">
+  <img id="word_cloud_image" src="" width="600" height="400">
 </div>
 </body>
 </html>

@@ -23,6 +23,9 @@ import org.launchcode.journal.models.Entry;
 import org.launchcode.journal.models.EntryIds;
 import org.launchcode.journal.models.data.EntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,7 +50,7 @@ WordCloudController {
     }
 
 
-    @PostMapping("/wordcloud")
+    @RequestMapping(value = "/wordcloud", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> generateWordCloud(@RequestBody ArrayList<Integer> entryIds, Model model) throws IOException, FontFormatException {
         System.out.println(entryIds);
 
@@ -108,19 +111,24 @@ WordCloudController {
         // Get the generated image as a BufferedImage
         BufferedImage bufferedImage = wordCloud.getBufferedImage();
 
+        File outputFile = new File("src/main/resources/static/wordcloud.png");
+        ImageIO.write(bufferedImage, "png", outputFile);
 
         // Encode the image as a Base64 string
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bufferedImage, "png", baos);
+        baos.close();
         baos.flush();
         byte[] imageBytes = baos.toByteArray();
         String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-        System.out.println(base64Image);
-        baos.close();
-        baos.flush();
 
-        // Return the Base64-encoded image as a response
-        return ResponseEntity.ok().body("{\"image\": \"" + base64Image + "\"}");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        return new ResponseEntity<String>(base64Image, headers, HttpStatus.OK);
+
+//        ResponseEntity response = ResponseEntity.ok().body("{\"image\": \"" + base64Image + "\"}");
+
+
     }
 
 
