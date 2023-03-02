@@ -20,7 +20,6 @@ import java.io.IOException;
 
 
 import org.launchcode.journal.models.Entry;
-import org.launchcode.journal.models.EntryIds;
 import org.launchcode.journal.models.data.EntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -66,7 +65,7 @@ WordCloudController {
 
         // Load stop words from a file
         Set<String> stopWords = new HashSet<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/static/stop_words.rtf"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/static/stop_words.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 stopWords.add(line.trim());
