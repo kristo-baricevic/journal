@@ -122,13 +122,10 @@ WordCloudController {
         byte[] imageBytes = baos.toByteArray();
         String base64Image = Base64.getEncoder().encodeToString(imageBytes);
 
+        // Return encoded image as a Response Entity
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         return new ResponseEntity<String>(base64Image, headers, HttpStatus.OK);
-
-//        ResponseEntity response = ResponseEntity.ok().body("{\"image\": \"" + base64Image + "\"}");
-
-
     }
 
 
