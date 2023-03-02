@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,6 +18,7 @@ public interface EntryRepository extends JpaRepository<Entry, Integer> {
 //    Iterable<Entry> findAll();
     public long countById(Integer id);
     public Optional<Entry> findById (Integer id);
+    public ArrayList<Entry> findAllByIdIn(ArrayList<Integer> ids);
     Iterable<Topic> findByTopicName(String name);
     Iterable<Mood> findByMoodName(String name);
 }

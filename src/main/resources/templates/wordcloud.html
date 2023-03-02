@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container  body-content">
+
+<nav th:replace="fragments :: page-header"></nav>
+
+  <title>Generate Word Cloud</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Handle form submission
+        $('form').submit(function(event) {
+            event.preventDefault();
+            // Get selected entries
+            var selected_entries = $('input:checked').map(function() {
+                return $(this).val();
+            }).get();
+
+            // Convert array of strings to array of integers
+            selected_entries = selected_entries.map(function(entry) {
+                return parseInt(entry);
+            });
+
+            // Generate word cloud
+            generate_word_cloud(selected_entries);
+        });
+
+        // Function to generate word cloud
+        function generate_word_cloud(entries) {
+            // Make AJAX request to server
+            $.ajax({
+                url: '/wordcloud',
+                method: 'POST',
+                data: JSON.stringify({entryIds: entries}),
+                contentType: 'application/json',
+                success: function(response) {
+                    // Display word cloud image
+                    $('#word_cloud_image').attr('src', 'data:image/png;base64,' + response.image);
+                    $('#word_cloud_image_container').show();
+                },
+                error: function() {
+                    alert('Error generating word cloud');
+                }
+            });
+        }
+    });
+</script>
+
+<h1>Generate Word Cloud</h1>
+<form method="post" th:action="@{/wordcloud}">
+    <div th:each="entry : ${entries}">
+      <label>
+        <input type="checkbox" th:name="entryIds[]" th:value="${entry.id}">
+        <span th:text="${entry.title}"></span>
+      </label><br>
+    </div>
+  <button type="submit">Generate</button>
+</form>
+<div id="word_cloud_image_container" style="display:none">
+  <h2>Word Cloud</h2>
+  <img id="word_cloud_image">
+</div>
+</body>
+</html>

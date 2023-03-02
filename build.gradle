@@ -24,6 +24,7 @@ repositories {
 }
 
 dependencies {
+	implementation 'com.kennycason:kumo-core:1.28'
 	implementation 'org.slf4j:slf4j-api'
 	implementation 'com.sun.mail:jakarta.mail'
 	implementation 'com.sun.activation:jakarta.activation'

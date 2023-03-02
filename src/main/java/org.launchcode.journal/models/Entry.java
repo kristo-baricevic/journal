@@ -23,6 +23,7 @@ public class Entry extends AbstractEntity{
     public Entry() {
     }
 
+
     // Initialize the id and value fields.
     public Entry(String aTitle, Topic aTopic, String aJournalEntry, Mood aMood) {
         super();
