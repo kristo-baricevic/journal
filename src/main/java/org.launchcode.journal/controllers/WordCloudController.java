@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.kennycason.kumo.WordCloud;
 import com.kennycason.kumo.bg.CircleBackground;
+import com.kennycason.kumo.bg.RectangleBackground;
+import com.kennycason.kumo.font.KumoFont;
 import com.kennycason.kumo.font.scale.SqrtFontScalar;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.CollisionMode;
@@ -102,7 +104,8 @@ WordCloudController {
         // Create a WordCloud object
         WordCloud wordCloud = new WordCloud(new Dimension(600, 400), CollisionMode.PIXEL_PERFECT);
         wordCloud.setPadding(2);
-        wordCloud.setBackground(new CircleBackground(200));
+        wordCloud.setKumoFont(new KumoFont(new Font("Arial", Font.PLAIN, 20)));
+        wordCloud.setBackground(new RectangleBackground(new Dimension(600, 400)));
         wordCloud.setColorPalette(new ColorPalette(new Color(0x4055F1), new Color(0x408DF1), new Color(0x40AAF1)));
         wordCloud.setFontScalar(new SqrtFontScalar(10, 60));
         wordCloud.build(frequencies);
