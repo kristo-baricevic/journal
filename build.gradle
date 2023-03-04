@@ -4,6 +4,12 @@ plugins {
 	id 'java'
 }
 
+task userHome {
+	doLast {
+		println gradle.gradleUserHomeDir
+	}
+}
+
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -24,6 +30,8 @@ repositories {
 }
 
 dependencies {
+	implementation 'edu.stanford.nlp:stanford-corenlp:4.5.2'
+	implementation 'edu.stanford.nlp:stanford-corenlp:4.5.2:models'
 	implementation 'com.kennycason:kumo-core:1.28'
 	implementation 'org.slf4j:slf4j-api'
 	implementation 'com.sun.mail:jakarta.mail'

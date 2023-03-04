@@ -17,6 +17,7 @@ import java.util.Properties;
 public class JournalApplication {
 
 	public static void main(String[] args) {
+		System.out.println(System.getProperty("java.class.path"));
 		SpringApplication.run(JournalApplication.class, args);
 	}
 

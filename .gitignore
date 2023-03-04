@@ -1,5 +1,8 @@
 HELP.md
 .gradle
+edu/stanford/nlp/models/kbp/english/wikidict.tab.gz
+edu/stanford/nlp/models/kbp/english/tac-re-kbp2015.ser
+edu/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
