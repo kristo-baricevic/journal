@@ -41,7 +41,7 @@ public class NlpServicesController {
     public ResponseEntity<List<AnalysisResult>> analyzeEntries(@RequestBody AnalysisRequest analysisRequest) {
         {
 
-            List<AnalysisResult> analysisResults = new ArrayList<>();
+            ArrayList<AnalysisResult> analysisResults = new ArrayList<>();
 
             ArrayList<Integer> entryIds = analysisRequest.getEntryIds();
             String analysisType = analysisRequest.getAnalysisType();
@@ -54,44 +54,52 @@ public class NlpServicesController {
             // perform analysis based on the selected analysis type
             for (Entry entry : entries) {
                 String result;
-                    switch (analysisType) {
-                        case "sentimentAnalysis":
-                            result = nlpService.getSentiment(entry.getJournalEntry());
-                             break;
-                        case "namedEntities":
-                            List<CoreEntityMention> entities = nlpService.getNamedEntities(entry.getJournalEntry());
-                            StringBuilder sb = new StringBuilder();
-                            for (CoreEntityMention entity : entities) {
-                                sb.append(entity.text()).append(", ");
-                            }
-                            if (sb.length() > 0) {
-                                sb.setLength(sb.length() - 2); // remove trailing comma and space
-                            }
-                            result = sb.toString();
-                            break;
-                        case "keyPhrases":
-                            List<String> keyPhrases = nlpService.getKeyPhrases(entry.getJournalEntry());
-                            result = String.join(", ", keyPhrases);
-                            break;
-                        case "emotionAnalysis":
-                            List<CoreSentence> emotions = nlpService.getEmotions(entry.getJournalEntry());
-                            StringBuilder sb2 = new StringBuilder();
-                            for (CoreSentence emotion : emotions) {
-                                sb2.append(emotion.text()).append(", ");
-                            }
-                            if (sb2.length() > 0) {
-                                sb2.setLength(sb2.length() - 2); // remove trailing comma and space
-                            }
-                            result = sb2.toString();
-                            break;
-                        default:
-                            // invalid analysis type
-                            result = "Invalid analysis type";
-                            break;
-                }
+                switch (analysisType) {
+                    case "sentimentAnalysis":
+                        result = nlpService.getSentiment(entry.getJournalEntry());
+                        analysisResults.add(new AnalysisResult(entry.getTitle(), result, "sentimentAnalysis"));
+                        break;
+                    case "namedEntities":
+                        List<CoreEntityMention> entities = nlpService.getNamedEntities(entry.getJournalEntry());
+                        StringBuilder sb = new StringBuilder();
+                        for (CoreEntityMention entity : entities) {
+                            sb.append(entity.text()).append(", ");
+                        }
+                        if (sb.length() > 0) {
+                            sb.setLength(sb.length() - 2); // remove trailing comma and space
+                        }
+                        result = sb.toString();
+                        analysisResults.add(new AnalysisResult(entry.getTitle(), result, "namedEntities"));
+                        break;
+                    case "keyPhrases":
+                        List<String> keyPhrases = nlpService.getKeyPhrases(entry.getJournalEntry());
+                        System.out.println(keyPhrases);
+                        result = String.join(", ", keyPhrases);
+                        analysisResults.add(new AnalysisResult(entry.getTitle(), result, "keyPhrases"));
+                        break;
+                    case "emotionAnalysis":
+                        List<SentenceInfo> emotions = nlpService.getEmotions(entry.getJournalEntry());
+                        StringBuilder sb2 = new StringBuilder();
+                        for (SentenceInfo emotion : emotions) {
+                            sb2.append(emotion.getText()).append(", ");
+                        }
+                        if (sb2.length() > 0) {
+                            sb2.setLength(sb2.length() - 2); // remove trailing comma and space
+                        }
+                        result = sb2.toString();
+                        analysisResults.add(new AnalysisResult(entry.getTitle(), result, "emotionAnalysis"));
 
-                AnalysisResult analysisResult = new AnalysisResult(entry.getTitle(), result);
-                analysisResults.add(analysisResult);
+
+                        break;
+                    default:
+                        // invalid analysis type
+                        result = "Invalid analysis type";
+                        analysisResults.add(new AnalysisResult(entry.getTitle(), result, "unknown"));
+                        break;
+                }
+//
+//                AnalysisResult analysisResult = new AnalysisResult(entry.getTitle(), result, analysisType);
+//                analysisResults.add(analysisResult);
             }
             return ResponseEntity.ok(analysisResults);
     }
