@@ -15,10 +15,7 @@ import edu.stanford.nlp.pipeline.CoreSentence;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 @Service
 public class NlpService {
@@ -50,12 +47,30 @@ public class NlpService {
         return document.sentences().get(0).sentiment();
     }
 
-    public List<CoreEntityMention> getNamedEntities(String text) {
-        System.out.println("check check");
+//    public List<CoreEntityMention> getNamedEntities(String text) {
+//        System.out.println("check check");
+//        CoreDocument document = new CoreDocument(text);
+//        pipeline.annotate(document);
+//        return document.entityMentions();
+//    }
+
+    public Map<String, List<String>> getNamedEntities(String text) {
         CoreDocument document = new CoreDocument(text);
         pipeline.annotate(document);
-        return document.entityMentions();
+
+        Map<String, List<String>> namedEntitiesMap = new HashMap<>();
+
+        for (CoreEntityMention em : document.entityMentions()) {
+            String category = em.entityType();
+            String entity = em.text();
+            namedEntitiesMap.putIfAbsent(category, new ArrayList<>());
+            namedEntitiesMap.get(category).add(entity);
+        }
+
+        return namedEntitiesMap;
     }
+
+
 
     public List<String> getKeyPhrases(String text) {
         List<String> nounPhrases = new ArrayList<>();

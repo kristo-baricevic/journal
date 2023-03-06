@@ -60,17 +60,20 @@ public class NlpServicesController {
                         analysisResults.add(new AnalysisResult(entry.getTitle(), result, "sentimentAnalysis"));
                         break;
                     case "namedEntities":
-                        List<CoreEntityMention> entities = nlpService.getNamedEntities(entry.getJournalEntry());
+                        Map<String, List<String>> namedEntitiesMap = nlpService.getNamedEntities(entry.getJournalEntry());
                         StringBuilder sb = new StringBuilder();
-                        for (CoreEntityMention entity : entities) {
-                            sb.append(entity.text()).append(", ");
-                        }
-                        if (sb.length() > 0) {
-                            sb.setLength(sb.length() - 2); // remove trailing comma and space
+                        for (Map.Entry<String, List<String>> mappedEntry : namedEntitiesMap.entrySet()) {
+                            String category = mappedEntry.getKey();
+                            List<String> entities = mappedEntry.getValue();
+                            sb.append("<br>").append(category).append(": ");
+                            for (String entity : entities) {
+                                sb.append(" ").append(entity);
+                            }
                         }
                         result = sb.toString();
                         analysisResults.add(new AnalysisResult(entry.getTitle(), result, "namedEntities"));
                         break;
+
                     case "keyPhrases":
                         List<String> keyPhrases = nlpService.getKeyPhrases(entry.getJournalEntry());
                         System.out.println(keyPhrases);
