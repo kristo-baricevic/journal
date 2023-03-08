@@ -80,6 +80,16 @@ public class NlpServicesController {
                         result = String.join(", ", keyPhrases);
                         analysisResults.add(new AnalysisResult(entry.getTitle(), result, "keyPhrases"));
                         break;
+                    case "getPhrases":
+                        Map<String, List<String>> phraseMap = nlpService.getPhrases(entry.getJournalEntry());
+                        List<String> verbPhrases = phraseMap.get("verbPhrases");
+                        List<String> nounPhrases = phraseMap.get("nounPhrases");
+
+                        System.out.println("Verb Phrases: " + verbPhrases);
+                        System.out.println("Noun Phrases: " + nounPhrases);
+
+                        analysisResults.add(new AnalysisResult(entry.getTitle(), "Verb Phrases: " + String.join(", ", verbPhrases) + "\nNoun Phrases: " + String.join(", ", nounPhrases), "getPhrases"));
+                        break;
                     case "emotionAnalysis":
                         List<SentenceInfo> emotions = nlpService.getEmotions(entry.getJournalEntry());
                         StringBuilder sb2 = new StringBuilder();
@@ -91,8 +101,6 @@ public class NlpServicesController {
                         }
                         result = sb2.toString();
                         analysisResults.add(new AnalysisResult(entry.getTitle(), result, "emotionAnalysis"));
-
-
                         break;
                     default:
                         // invalid analysis type

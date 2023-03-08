@@ -2,12 +2,18 @@ package org.launchcode.journal.models;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ling.IndexedWord;
 import edu.stanford.nlp.pipeline.*;
 import edu.stanford.nlp.semgraph.SemanticGraph;
+import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
 import edu.stanford.nlp.semgraph.SemanticGraphEdge;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
+import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.trees.TreeCoreAnnotations;
 import edu.stanford.nlp.util.CoreMap;
+import edu.stanford.nlp.util.Index;
+import edu.stanford.nlp.util.PropertiesUtils;
 import org.springframework.stereotype.Service;
 import edu.stanford.nlp.pipeline.CoreDocument;
 import edu.stanford.nlp.pipeline.CoreEntityMention;
@@ -16,6 +22,7 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class NlpService {
@@ -36,23 +43,12 @@ public class NlpService {
         this.pipeline = new StanfordCoreNLP(props);
     }
 
-
-
-
-
     public String getSentiment(String text) {
         System.out.println("check check");
         CoreDocument document = new CoreDocument(text);
         pipeline.annotate(document);
         return document.sentences().get(0).sentiment();
     }
-
-//    public List<CoreEntityMention> getNamedEntities(String text) {
-//        System.out.println("check check");
-//        CoreDocument document = new CoreDocument(text);
-//        pipeline.annotate(document);
-//        return document.entityMentions();
-//    }
 
     public Map<String, List<String>> getNamedEntities(String text) {
         CoreDocument document = new CoreDocument(text);
@@ -109,6 +105,46 @@ public class NlpService {
         return nounPhrases;
     }
 
+    public Map<String, List<String>> getPhrases(String text) {
+        Map<String, List<String>> phraseMap = new HashMap<>();
+        phraseMap.put("verbPhrases", new ArrayList<>());
+        phraseMap.put("nounPhrases", new ArrayList<>());
+
+        Properties props = PropertiesUtils.asProperties(
+                "annotators", "tokenize,ssplit,pos,lemma,depparse",
+                "depparse.model", "edu/stanford/nlp/models/parser/nndep/english_UD.gz",
+                "parse.keepPunct", "false");
+        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+
+        Annotation document = new Annotation(text);
+        pipeline.annotate(document);
+
+        List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
+        for (CoreMap sentence : sentences) {
+            SemanticGraph dependencies = sentence.get(SemanticGraphCoreAnnotations.EnhancedPlusPlusDependenciesAnnotation.class);
+            System.out.println(dependencies);
+            List<IndexedWord> verbs = dependencies.getAllNodesByPartOfSpeechPattern("VB|VBD|VBG|VBN|VBP|VBZ");
+            for (IndexedWord verb : verbs) {
+                String verbLemma = verb.get(CoreAnnotations.LemmaAnnotation.class);
+                List<SemanticGraphEdge> edges = dependencies.outgoingEdgeList(verb);
+                for (SemanticGraphEdge edge : edges) {
+                    if (edge.getRelation().getShortName().equals("dobj")) {
+                        IndexedWord object = edge.getTarget();
+                        List<CoreLabel> tokens = dependencies.getNodeByIndex(object.index()).get(CoreAnnotations.TokensAnnotation.class);
+                        String phrase = tokens.stream().map(CoreLabel::word).collect(Collectors.joining(" "));
+                        phraseMap.get("verbPhrases").add(verbLemma + " " + phrase);
+                    } else if (edge.getRelation().getShortName().equals("nsubjpass")) {
+                        IndexedWord subject = edge.getTarget();
+                        List<CoreLabel> tokens = dependencies.getNodeByIndex(subject.index()).get(CoreAnnotations.TokensAnnotation.class);
+                        String phrase = tokens.stream().map(CoreLabel::word).collect(Collectors.joining(" "));
+                        System.out.println(phrase);
+                        phraseMap.get("nounPhrases").add("by " + phrase + " " + verbLemma);
+                    }
+                }
+            }
+        }
+        return phraseMap;
+    }
 
     public List<SentenceInfo> getEmotions(String text) {
         CoreDocument document = new CoreDocument(text);
@@ -125,10 +161,5 @@ public class NlpService {
         }
         return emotions;
     }
-
-
-
-
-
 }
 
