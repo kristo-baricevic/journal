@@ -3,12 +3,15 @@ package org.launchcode.journal.models;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.IndexedWord;
+import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.pipeline.*;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
 import edu.stanford.nlp.semgraph.SemanticGraphEdge;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
+import edu.stanford.nlp.trees.HeadFinder;
+import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations;
 import edu.stanford.nlp.util.CoreMap;
@@ -20,6 +23,7 @@ import edu.stanford.nlp.pipeline.CoreEntityMention;
 import edu.stanford.nlp.pipeline.CoreSentence;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
+import java.util.List;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,95 +75,51 @@ public class NlpService {
     public List<String> getKeyPhrases(String text) {
         List<String> nounPhrases = new ArrayList<>();
 
-        // set up Stanford CoreNLP pipeline with part-of-speech tagging
+        // set up Stanford CoreNLP pipeline with part-of-speech tagging and constituency parsing
         Properties props = new Properties();
-        props.setProperty("annotators", "tokenize, ssplit, pos");
+        props.setProperty("annotators", "tokenize, ssplit, pos, parse");
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 
-        // annotate text and iterate over sentences and tokens to extract noun phrases
+        // annotate text and iterate over sentences and parse trees to extract noun phrases
         Annotation document = new Annotation(text);
         pipeline.annotate(document);
         List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
         for (CoreMap sentence : sentences) {
-            List<CoreLabel> tokens = sentence.get(CoreAnnotations.TokensAnnotation.class);
-            for (int i = 0; i < tokens.size(); i++) {
-                CoreLabel token = tokens.get(i);
-                String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
-                if (pos.startsWith("N")) { // if token is a noun
-                    String nounPhrase = token.word();
-                    // check if next token is also a noun and combine if so
-                    for (int j = i + 1; j < tokens.size(); j++) {
-                        CoreLabel nextToken = tokens.get(j);
-                        String nextPos = nextToken.get(CoreAnnotations.PartOfSpeechAnnotation.class);
-                        if (nextPos.startsWith("N")) {
-                            nounPhrase += " " + nextToken.word();
-                            i++;
-                        } else {
-                            break;
-                        }
-                    }
-                    nounPhrases.add(nounPhrase);
-                }
+            Tree tree = sentence.get(TreeCoreAnnotations.TreeAnnotation.class);
+            List<Tree> nounPhraseTrees = extractNounPhraseTrees(tree);
+            for (Tree nounPhraseTree : nounPhraseTrees) {
+                String nounPhrase = nounPhraseTree.getLeaves().stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining(" "));
+                nounPhrases.add(nounPhrase);
             }
         }
         return nounPhrases;
     }
 
-    public Map<String, List<String>> getPhrases(String text) {
-        Map<String, List<String>> phraseMap = new HashMap<>();
-        phraseMap.put("verbPhrases", new ArrayList<>());
-        phraseMap.put("nounPhrases", new ArrayList<>());
-
-        Properties props = PropertiesUtils.asProperties(
-                "annotators", "tokenize,ssplit,pos,lemma,depparse",
-                "depparse.model", "edu/stanford/nlp/models/parser/nndep/english_UD.gz",
-                "parse.keepPunct", "false");
-        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-
-        Annotation document = new Annotation(text);
-        pipeline.annotate(document);
-
-        List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
-        for (CoreMap sentence : sentences) {
-            SemanticGraph dependencies = sentence.get(SemanticGraphCoreAnnotations.EnhancedPlusPlusDependenciesAnnotation.class);
-            System.out.println(dependencies);
-            List<IndexedWord> verbs = dependencies.getAllNodesByPartOfSpeechPattern("VB|VBD|VBG|VBN|VBP|VBZ");
-            for (IndexedWord verb : verbs) {
-                String verbLemma = verb.get(CoreAnnotations.LemmaAnnotation.class);
-                List<SemanticGraphEdge> edges = dependencies.outgoingEdgeList(verb);
-                for (SemanticGraphEdge edge : edges) {
-                    if (edge.getRelation().getShortName().equals("dobj")) {
-                        IndexedWord object = edge.getTarget();
-                        List<CoreLabel> tokens = dependencies.getNodeByIndex(object.index()).get(CoreAnnotations.TokensAnnotation.class);
-                        String phrase = tokens.stream().map(CoreLabel::word).collect(Collectors.joining(" "));
-                        phraseMap.get("verbPhrases").add(verbLemma + " " + phrase);
-                    } else if (edge.getRelation().getShortName().equals("nsubjpass")) {
-                        IndexedWord subject = edge.getTarget();
-                        List<CoreLabel> tokens = dependencies.getNodeByIndex(subject.index()).get(CoreAnnotations.TokensAnnotation.class);
-                        String phrase = tokens.stream().map(CoreLabel::word).collect(Collectors.joining(" "));
-                        System.out.println(phrase);
-                        phraseMap.get("nounPhrases").add("by " + phrase + " " + verbLemma);
-                    }
-                }
+    private static List<Tree> extractNounPhraseTrees(Tree tree) {
+        List<Tree> nounPhrases = new ArrayList<>();
+        if (tree.isLeaf()) {
+            return nounPhrases;
+        }
+        String label = tree.label().value();
+        if (label.equals("NP")) {
+            nounPhrases.add(tree);
+        } else {
+            for (Tree child : tree.children()) {
+                nounPhrases.addAll(extractNounPhraseTrees(child));
             }
         }
-        return phraseMap;
+        return nounPhrases;
     }
 
-    public List<SentenceInfo> getEmotions(String text) {
-        CoreDocument document = new CoreDocument(text);
-        pipeline.annotate(document);
-        List<CoreSentence> sentences = document.sentences();
-        List<SentenceInfo> emotions = new ArrayList<>();
-        for (CoreSentence sentence : sentences) {
-            String sentiment = sentence.sentiment();
-            if (!sentiment.equals("Neutral")) {
-                List<CoreEntityMention> entityMentions = sentence.entityMentions();
-                SentenceInfo sentenceInfo = new SentenceInfo(sentence.text(), sentence, sentiment, entityMentions);
-                emotions.add(sentenceInfo);
-            }
-        }
-        return emotions;
+
+
+    private boolean hasNounHead(Tree tree) {
+        Tree head = tree.headTerminal((HeadFinder) new PennTreebankLanguagePack());
+        String pos = head.label().value();
+        return pos.startsWith("NN") || pos.startsWith("PRP");
     }
+
 }
 
