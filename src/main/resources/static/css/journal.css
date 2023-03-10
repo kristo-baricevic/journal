@@ -19,6 +19,7 @@
    left: 0;
    right: 0;
    z-index: 9999;
+   border-bottom: 6px solid white;
 }
 body
 {
@@ -229,5 +230,22 @@ form
 {
     font-size: 12px;
     color: black;
-    display: inline-block;
+    display: flex;
+}
+.search-form
+{
+    align: right;
+}
+.search-container
+{
+    width: 200px;
+}
+footer
+{
+    background-color: black;
+    position: bottom;
+}
+.icon
+{
+    position: bottom;
 }

@@ -15,11 +15,11 @@
     <!-- begin drop down buttons-->
     <div class="menu-bar">
         <ul>
-            <li><a th:href="@{/}" class="navbar-brand"><img src="/img/cloud-windy-line.png"></img>
+            <li><a th:href="@{/}" class="navbar-brand"><img class="icon" src="/img/cloud-line.png"/>
                 Dream-Z</a></li>
             <li><a th:href="@{/login}" class="menu-item">Login</a></li>
             <li><a th:href="@{/logout}" class="menu-item">Logout</a></li>
-            <li><a href="#">Add</a>
+            <li><a href="#"><img src="/img/moon-cloudy-fill.png">Add</a>
                 <div class="sub-menu-1">
                     <ul>
                         <li><a th:href="@{/entries/add}">Add Entry</a></li>
@@ -28,7 +28,7 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="#">Edit</a>
+            <li><a href="#"><img class="icon" src="/img/moon-cloudy-line.png"/>Edit</a>
                 <div class="sub-menu-2">
                     <ul>
                         <li><a th:href="@{/entries/list}">Edit Entry</a></li>
@@ -37,7 +37,7 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="#">Analysis</a>
+            <li><a href="#"><img class="icon" src="/img/cloud-windy-line.png"/>Analysis</a>
                 <div class="sub-menu-3">
                     <ul>
                         <li><a th:href="@{/wordcloud}">WordCloud</a></li>
@@ -48,8 +48,8 @@
                 </div>
             </li>
             <li class="search">
-                <form th:action="@{/index/results}" method = "post">
-                    <p>
+                <form class="search-form" th:action="@{/index/results}" method = "post">
+                    <p class="search-container">
 <!--                        <input-->
 <!--                                type="radio"-->
 <!--                                name="searchType"-->
