@@ -281,3 +281,30 @@ footer
     position: bottom;
     padding: 2px;
 }
+.centeredTable
+{
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* add box shadow */
+    border-collapse: collapse; /* remove borders */
+    width: 50%;
+}
+.centeredTable tr th
+{
+   background-color: black; /* black background */
+   color: white; /* white text */
+   font-weight: bold;
+   padding: 10px;
+   text-align: left;
+}
+.centeredTable tr td:nth-child(even)
+{
+   background-color: #f2f2f2; /* light gray background */
+}
+.centeredTable tr td:nth-child(odd)
+{
+   background-color: white; /* white background */
+}
+.centeredTable td
+{
+   padding: 10px;
+   border: none; /* remove borders */
+}
