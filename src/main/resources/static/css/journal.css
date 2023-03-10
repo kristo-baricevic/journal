@@ -30,18 +30,20 @@ body
 }
 .menu-bar
 {
+    font-family: 'Merriweather';
     background-color: #FFAFE9;
     text-align: center;
+    font-weight: bold;
 }
 .menu-bar ul
 {
     display: inline-flex;
     list-style: none;
-    color: #fff;
 }
 .menu-bar ul li
 {
-    width: 120px;
+    display: block;
+    width: 100px;
     margin: 8px;
     padding: 5px;
 }
@@ -78,16 +80,19 @@ body
 }
 .menu-bar ul li:hover .sub-menu-1 ul:hover
 {
-    background: #FFEBF3;
 }
 .menu-bar ul li:hover .sub-menu-1 ul li
 {
-    width: 150px;
+    width: 120px;
     padding: 10px;
     border-bottom: 1px;
     background: transparent;
     border-radius: 0;
     text-align: left;
+}
+.menu-bar ul li:hover .sub-menu-1 ul li:hover
+{
+    background-color: #fff2f4;
 }
 .menu-bar ul li:hover .sub-menu-1 ul li:last-child
 {
@@ -95,6 +100,7 @@ body
 }
 .menu-bar ul li:hover .sub-menu-1 ul li a:hover
 {
+    background-color: #fff2f4;
     color: black;
 }
 .sub-menu-2
@@ -116,11 +122,10 @@ body
 }
 .menu-bar ul li:hover .sub-menu-2 ul:hover
 {
-    background: #FFEBF3;
 }
 .menu-bar ul li:hover .sub-menu-2 ul li
 {
-    width: 150px;
+    width: 120px;
     padding: 10px;
     border-bottom: 1px;
     background: transparent;
@@ -130,6 +135,11 @@ body
 .menu-bar ul li:hover .sub-menu-2 ul li:last-child
 {
     border-bottom: none;
+}
+.menu-bar ul li:hover .sub-menu-2 ul li:hover
+{
+    background-color: #fff2f4;
+    color: black;
 }
 .menu-bar ul li:hover .sub-menu-2 ul li a:hover
 {
@@ -154,7 +164,7 @@ body
 }
 .menu-bar ul li:hover .sub-menu-3 ul li
 {
-    width: 150px;
+    width: 120px;
     padding: 10px;
     border-bottom: 1px;
     background: transparent;
@@ -165,9 +175,23 @@ body
 {
     border-bottom: none;
 }
+.menu-bar ul li:hover .sub-menu-3 ul li:hover
+{
+    background-color: #fff2f4;
+    color: black;
+}
 .menu-bar ul li:hover .sub-menu-3 ul li a:hover
 {
     color: black;
+}
+.navbar-brand-container
+{
+    width: 120px;
+    padding: 0px;
+    border-bottom: 1px;
+    background: transparent;
+    border-radius: 0;
+    text-align: center;
 }
 .navbar-brand
 {
@@ -182,12 +206,16 @@ body
 }
 h1
 {
-    margin-top: 35px;
-    padding: 10px;
+    font-family: 'Merriweather';
+    font-size: 26px;
+    margin-top: 80px;
+    padding: 25px;
 }
 h2{
-    margin-top: 35px;
-    padding: 10px;
+    font-family: 'Merriweather';
+    font-size: 26px;
+    margin-top: 80px;
+    padding: 25px;
 }
 form
 {
@@ -226,19 +254,22 @@ form
 .table tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
-.search
+.menu-bar .search
 {
     font-size: 12px;
     color: black;
     display: flex;
+    width: 200px;
+    margin: 8px;
+    padding: 5px;
 }
-.search-form
+.menu-bar .search-form
 {
     align: right;
 }
-.search-container
+.menu-bar .search-container
 {
-    width: 200px;
+
 }
 footer
 {
@@ -248,4 +279,5 @@ footer
 .icon
 {
     position: bottom;
+    padding: 2px;
 }

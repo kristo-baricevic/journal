@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org/">
 
 <head th:fragment="head">
-
     <!-- Bootstrap stylesheets and script -->
     <link th:href="@{/css/journal.css}" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'/>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
     <title th:text="'Dream-Z' + ${title == null ? '' : ' :: ' + title}">Dream-Z</title>
@@ -15,11 +15,13 @@
     <!-- begin drop down buttons-->
     <div class="menu-bar">
         <ul>
-            <li><a th:href="@{/}" class="navbar-brand"><img class="icon" src="/img/cloud-line.png"/>
-                Dream-Z</a></li>
-            <li><a th:href="@{/login}" class="menu-item">Login</a></li>
-            <li><a th:href="@{/logout}" class="menu-item">Logout</a></li>
-            <li><a href="#"><img src="/img/moon-cloudy-fill.png">Add</a>
+            <li class="navbar-brand-container"><a th:href="@{/}" class="navbar-brand"><img class="icon" src="/img/cloud-line.png"/>
+                <br/>Dream-Z</a></li>
+            <div>
+                <li><a th:href="@{/login}" class="menu-item">Login</a></li>
+                <li><a th:href="@{/logout}" class="menu-item">Logout</a></li>
+            </div>
+                <li><a href="#"><img class="icon" src="/img/moon-cloudy-fill.png"><br/>Add</a>
                 <div class="sub-menu-1">
                     <ul>
                         <li><a th:href="@{/entries/add}">Add Entry</a></li>
@@ -27,8 +29,8 @@
                         <li><a th:href="@{/moods/add}">Add Mood</a></li>
                     </ul>
                 </div>
-            </li>
-            <li><a href="#"><img class="icon" src="/img/moon-cloudy-line.png"/>Edit</a>
+                </li>
+                <li><a href="#"><img class="icon" src="/img/moon-cloudy-line.png"/><br/>Edit</a>
                 <div class="sub-menu-2">
                     <ul>
                         <li><a th:href="@{/entries/list}">Edit Entry</a></li>
@@ -36,8 +38,8 @@
                         <li><a th:href="@{/moods/list}">Edit Mood</a></li>
                     </ul>
                 </div>
-            </li>
-            <li><a href="#"><img class="icon" src="/img/cloud-windy-line.png"/>Analysis</a>
+                </li>
+                <li><a href="#"><img class="icon" src="/img/cloud-windy-line.png"/><br/>Analysis</a>
                 <div class="sub-menu-3">
                     <ul>
                         <li><a th:href="@{/wordcloud}">WordCloud</a></li>
@@ -47,9 +49,9 @@
                     </ul>
                 </div>
             </li>
-            <li class="search">
-                <form class="search-form" th:action="@{/index/results}" method = "post">
-                    <p class="search-container">
+            <li class=".menu-bar search">
+                <form class=".menu-bar search-form" th:action="@{/index/results}" method = "post">
+                    <p class=".menu-bar search-container">
 <!--                        <input-->
 <!--                                type="radio"-->
 <!--                                name="searchType"-->
