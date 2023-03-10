@@ -1,10 +1,9 @@
-function checkPasswordMatch(fieldConfirmPassword) {
-    if (fieldConfirmPassword.value != $("password").val()) {
-        fieldConfirmPassword.setCustomValidity("Passwords do not match!");
-    } else {
-        fieldConfirmPassword.setCustomValidity("");
-    }
-}
+/*!
+* Start Bootstrap - Clean Blog v6.0.8 (https://startbootstrap.com/theme/clean-blog)
+* Copyright 2013-2022 Start Bootstrap
+* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/master/LICENSE)
+*/
+
 
 window.addEventListener('DOMContentLoaded', () => {
     let scrollPos = 0;

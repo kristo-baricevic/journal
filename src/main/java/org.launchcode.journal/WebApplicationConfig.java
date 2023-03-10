@@ -18,8 +18,8 @@ public class WebApplicationConfig implements WebMvcConfigurer {
 
     // Create spring-managed object to allow the app to access our filter
     @Bean
-    public org.journal.journal.AuthenticationFilter authenticationFilter() {
-        return new org.journal.journal.AuthenticationFilter();
+    public AuthenticationFilter authenticationFilter() {
+        return new AuthenticationFilter();
     }
 
     // Register the filter with the Spring container

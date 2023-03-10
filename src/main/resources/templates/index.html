@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
 </head>
-<body class="container body-content">
+<body>
 
 <div th:replace="fragments :: page-header"></div>
 <center>
 <h2>Journal Entries</h2>
 
-<table class="table-listing">
+<table class="table">
     <tr th:each="entry : ${entries}">
         <td>
             <p th:text="${'Entry Id: ' + entry.id}"></p>
@@ -24,7 +24,6 @@
             </p>
             <p th:text="${'Mood: ' + entry.mood}"></p>
         </td>
-
     </tr>
 </table>
 </center>

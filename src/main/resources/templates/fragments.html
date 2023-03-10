@@ -4,75 +4,85 @@
 <head th:fragment="head">
 
     <!-- Bootstrap stylesheets and script -->
-    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
     <link th:href="@{/css/journal.css}" rel="stylesheet" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
-
-    <title th:text="'My Journal Companion' + ${title == null ? '' : ' :: ' + title}">My Journal Companion</title>
+    <title th:text="'Dream-Z' + ${title == null ? '' : ' :: ' + title}">Dream-Z</title>
 </head>
 
-<body class="container body-content">
+<body>
+<div th:fragment="page-header" class="header">
+    <!-- begin drop down buttons-->
+    <div class="menu-bar">
+        <ul>
+            <li><a th:href="@{/}" class="navbar-brand"><img src="/img/cloud-windy-line.png"></img>
+                Dream-Z</a></li>
+            <li><a th:href="@{/login}" class="menu-item">Login</a></li>
+            <li><a th:href="@{/logout}" class="menu-item">Logout</a></li>
+            <li><a href="#">Add</a>
+                <div class="sub-menu-1">
+                    <ul>
+                        <li><a th:href="@{/entries/add}">Add Entry</a></li>
+                        <li><a th:href="@{/topics/add}">Add Topic</a></li>
+                        <li><a th:href="@{/moods/add}">Add Mood</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#">Edit</a>
+                <div class="sub-menu-2">
+                    <ul>
+                        <li><a th:href="@{/entries/list}">Edit Entry</a></li>
+                        <li><a th:href="@{/topics/list}">Edit Topic</a></li>
+                        <li><a th:href="@{/moods/list}">Edit Mood</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#">Analysis</a>
+                <div class="sub-menu-3">
+                    <ul>
+                        <li><a th:href="@{/wordcloud}">WordCloud</a></li>
+                        <li><a th:href="@{/analysis}">Analyze</a></li>
+                        <li><a th:href="@{/list-topics}">View by Topic</a></li>
+                        <li><a th:href="@{/list-moods}">View by Mood</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="search">
+                <form th:action="@{/index/results}" method = "post">
+                    <p>
+<!--                        <input-->
+<!--                                type="radio"-->
+<!--                                name="searchType"-->
+<!--                                id="all"-->
+<!--                                value="all"-->
+<!--                                checked="true"/>-->
 
-<div th:fragment="page-header" class= "navbar navbar-custom">
-    <div class="container">
-        <div class="navbar-header">
-            <a th:href="@{/}" class="navbar-brand">My Journal Companion</a>
-        </div>
-        <div class="navbar-collapse collapse.show">
-            <ul class="nav navbar-nav">
-                <li><a th:href="@{/login}">Login</a></li>
-                <li><a th:href="@{/logout}">Logout</a></li>
-                <li><a th:href="@{/entries/add}">Add an Entry</a></li>
-                <li><a th:href="@{/entries/list}">Edit Entry</a></li>
-                <li><a th:href="@{/list-topics}">List Entries By Topic </a></li>
-                <li><a th:href="@{/topics/add}">Add Topic</a></li>
-                <li><a th:href="@{/topics/list}">Edit Topic</a></li>
-                <li><a th:href="@{/moods/add}">Add Mood</a></li>
-                <li><a th:href="@{/moods/list}">Edit Mood</a></li>
-                <li><a th:href="@{/wordcloud}">WordCloud</a></li>
-                <li><a th:href="@{/analysis}">Analysis</a></li>
-                <li>
-                    <form th:action="@{/index/results}" method = "post">
-                        <p>
-                            <input
-                                    type="radio"
-                                    name="searchType"
-                                    id="all"
-                                    value="all"
-                                    checked="true"/>
-
-                            <label for="all">all</label>
-
-                            <input
-                                    type="radio"
-                                    name="searchType"
-                                    id="title"
-                                    value="title"/>
-                            <label for="title">title</label>
-
-                            <input
-                                    type="radio"
-                                    name="searchType"
-                                    id="topic"
-                                    value="topic"/>
-                            <label for="topic">topic</label>
-
-                            <input
-                                    type="radio"
-                                    name="searchType"
-                                    id="mood"
-                                    value="mood"/>
-                            <label for="mood">mood</label>
-
-
-                        </p>
-                        <label for="searchTerm"></label>
-                        <input type="text" name="searchTerm" id="searchTerm" />
-                        <input type="submit" value="Search" />
-                    </form>
-                </li>
-            </ul>
-        </div>
+<!--                        <label for="all">all</label>-->
+                        <input
+                                type="radio"
+                                name="searchType"
+                                id="title"
+                                value="title"/>
+                        <label for="title">title</label>
+                        <input
+                                type="radio"
+                                name="searchType"
+                                id="topic"
+                                value="topic"/>
+                        <label for="topic">topic</label>
+                        <input
+                                type="radio"
+                                name="searchType"
+                                id="mood"
+                                value="mood"/>
+                        <label for="mood">mood</label>
+                    </p>
+                    <label for="searchTerm"></label>
+                    <input type="text" name="searchTerm" id="searchTerm" />
+                    <input type="submit" value="Search" />
+                </form>
+            </li>
+        </ul>
     </div>
 </div>
 </body>

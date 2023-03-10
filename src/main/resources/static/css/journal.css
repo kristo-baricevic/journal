@@ -1,84 +1,233 @@
-body {
-background-color: #E9FFF4;
+*
+{
+    padding: 0;
+    margin: 0;
 }
-
-.body-content {
-    margin-top: 0px;
-}
-
-td, th {
+.menu-item
+{
+    width: 150px;
     padding: 10px;
+    border-bottom: 1px;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
 }
-
-th {
+.header
+{
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 9999;
+}
+body
+{
+    background-color: #FFD3F3;
+    box-sizing: border-box;
+    font-family: sans-sarif;
+    padding: 50px;
+}
+.menu-bar
+{
+    background-color: #FFAFE9;
     text-align: center;
 }
-
-td {
-    vertical-align: top;
+.menu-bar ul
+{
+    display: inline-flex;
+    list-style: none;
+    color: #fff;
 }
-
-tr {
+.menu-bar ul li
+{
+    width: 120px;
+    margin: 8px;
+    padding: 5px;
+}
+.menu-bar ul li a
+{
+    text-decoration: none;
+    color: black;
+}
+.menu-bar ul li:hover
+{
+    background: #FFEBF3;
+}
+.active, .menu-bar ul li:hover
+{
+    background: #FFE8F9;
+    border-radius: 3px;
+}
+.sub-menu-1
+{
+    display: none;
+}
+.menu-bar ul li:hover .sub-menu-1
+{
+    display: block;
+    position: absolute;
+    background: #FFE8F9;
+    margin-top: 15px;
+    margin-left: -15px;
+}
+.menu-bar ul li:hover .sub-menu-1 ul
+{
+    display: block;
+    margin: 10px;
+}
+.menu-bar ul li:hover .sub-menu-1 ul:hover
+{
+    background: #FFEBF3;
+}
+.menu-bar ul li:hover .sub-menu-1 ul li
+{
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
+}
+.menu-bar ul li:hover .sub-menu-1 ul li:last-child
+{
+    border-bottom: none;
+}
+.menu-bar ul li:hover .sub-menu-1 ul li a:hover
+{
+    color: black;
+}
+.sub-menu-2
+{
+    display: none;
+}
+.menu-bar ul li:hover .sub-menu-2
+{
+    display: block;
+    position: absolute;
+    background: #FFE8F9;
+    margin-top: 15px;
+    margin-left: -15px;
+}
+.menu-bar ul li:hover .sub-menu-2 ul
+{
+    display: block;
+    margin: 10px;
+}
+.menu-bar ul li:hover .sub-menu-2 ul:hover
+{
+    background: #FFEBF3;
+}
+.menu-bar ul li:hover .sub-menu-2 ul li
+{
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
+}
+.menu-bar ul li:hover .sub-menu-2 ul li:last-child
+{
+    border-bottom: none;
+}
+.menu-bar ul li:hover .sub-menu-2 ul li a:hover
+{
+    color: black;
+}
+.sub-menu-3
+{
+    display: none;
+}
+.menu-bar ul li:hover .sub-menu-3
+{
+    display: block;
+    position: absolute;
+    background: #FFE8F9;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+.menu-bar ul li:hover .sub-menu-3 ul
+{
+    display: block;
+    margin: 10px;
+}
+.menu-bar ul li:hover .sub-menu-3 ul li
+{
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
+}
+.menu-bar ul li:hover .sub-menu-3 ul li:last-child
+{
+    border-bottom: none;
+}
+.menu-bar ul li:hover .sub-menu-3 ul li a:hover
+{
+    color: black;
+}
+.navbar-brand
+{
+    font-size: 22px;
+    font-family: 'Brush Script MT', cursive;
+}
+.login
+{
+    max-width: 500px;
+    padding: 10px;
     background-color: white;
 }
-
-tr:nth-child(odd) {
-    background-color: #e4e4e4;
+h1
+{
+    margin-top: 35px;
+    padding: 10px;
 }
-.navbar-custom {
-            background-color: #3B9D6C;
-        }
-        /* Modify brand and text color */
-
-.navbar-custom .navbar-brand{
-            color: black;
-        }
-.navbar-custom .navbar-text{
-    color: white;
+h2{
+    margin-top: 35px;
+    padding: 10px;
 }
-
-.centeredTable {
-    margin-left: auto;
-    margin-right: auto;
+form
+{
+    align: center;
 }
-
-table.job-listing {
-    margin: 30px auto;
-    border: 1px solid #e4e4e4;
-    width: 80%;
+.field
+{
+    max-width: 500px;
+    background-color: white;
 }
+.form-group
+{
+    max-width: 500px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 20%:
+    box-shadow: 10px 5px 5px red;
 
-table.job-listing td:first-child {
-    font-weight: bold;
 }
-
-table.job-listing td:last-child {
-    width: 80%;
+.form-control
+{
+    max-width: 460px;
 }
-
-label {
-    margin-right: 15px;
+.table {
+    border-collapse: collapse;
+    width: 75%;
+    margin-left:50px;
+    margin-right:50px;
 }
-
-.centered {
-    text-align: center;
+.table td {
+    padding: 10px;
 }
-
-p {
-    vertical-align: top;
-    margin-left: 30px;
+.table tr:nth-child(even) {
+    background-color: white;
 }
-
-.centeredTable {
-    margin-left: auto;
-    margin-right: auto;
+.table tr:nth-child(odd) {
+    background-color: #f2f2f2;
 }
-
-div.job-listing {
-    border: 1px solid #e4e4e4;
-    width: 80%;
-    background-color: #e4e4e4;
-}
-div.navbar.navbar-inverse navbar-fixed-top {
-    background-color: #3B9D6C;
+.search
+{
+    font-size: 12px;
+    color: black;
+    display: inline-block;
 }

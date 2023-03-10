@@ -26,7 +26,7 @@
                     <th:block th:if="${not mood.entries.empty}">
                         <ul>
                             <li th:each="entry : ${mood.entries}">
-                                <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.name}"></a>
+                                <a th:href="@{'/entries/show/' + ${entry.id}}" th:text="${entry.title}"></a>
                             </li>
                         </ul>
                     </th:block>

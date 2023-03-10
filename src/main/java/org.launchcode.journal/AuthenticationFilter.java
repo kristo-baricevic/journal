@@ -1,4 +1,4 @@
-package org.journal.journal;
+package org.launchcode.journal;
 
 import org.launchcode.journal.controllers.AuthenticationController;
 import org.launchcode.journal.models.User;
@@ -22,7 +22,7 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
     AuthenticationController authenticationController;
 
     // Whitelist variable containing the paths that can be accessed without a user session
-    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/forgot_password","/forgot_password_form","/reset_password", "/reset_password_form", "/reset_password?token", "/message", "/css");
+    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/forgot_password","/forgot_password_form","/reset_password", "/reset_password_form", "/reset_password?token", "/message", "/css", "/img");
 
     // Method that checks a given path against the values in the whitelist
     private static boolean isWhiteListed(String path) {
