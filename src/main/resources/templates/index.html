@@ -8,21 +8,21 @@
 <center>
 <h2>Journal Entries</h2>
 
-<table class="table">
+<table class="entry-table">
     <tr th:each="entry : ${entries}">
         <td>
-            <p th:text="${'Entry Id: ' + entry.id}"></p>
-            <p>
+            <p class="entry-name">
                 Name:
                 <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.title}"></a>
             </p>
-            <p>
+            <p class="entry-topic">
                 Topic:
                 <a th:href="@{'/topics/show/' + ${entry.topic.id}}" th:text="${entry.topic}"></a>
             </p>
-            <p th:text="${'Journal Entry: ' + entry.journalEntry}">
+            <p class="entry-topic" th:text="${'Mood: ' + entry.mood}"></p>
+            <br />
+            <p class="entry-body" th:text="${entry.journalEntry}">
             </p>
-            <p th:text="${'Mood: ' + entry.mood}"></p>
         </td>
     </tr>
 </table>

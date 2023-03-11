@@ -308,3 +308,36 @@ footer
    padding: 10px;
    border: none; /* remove borders */
 }
+.entry-table
+{
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* add box shadow */
+    padding: 0px;
+    width: 60%
+}
+.entry-table tr
+{
+    padding: 20px;
+}
+.entry-table tr:nth-child(even)
+{
+    background-color: white;
+}
+.entry-table tr:nth-child(odd)
+{
+    background-color: #f2f2f2;
+}
+
+.entry-table .entry-name
+{
+}
+.entry-table .entry-name a
+{
+}
+.entry-table .entry-topic
+{
+}
+.entry-table .entry-body
+{
+    padding: 20px;
+    font-family: Garamond, serif;
+}
