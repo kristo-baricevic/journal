@@ -341,3 +341,7 @@ footer
     padding: 20px;
     font-family: Garamond, serif;
 }
+.no-bullets-list
+{
+    list-style-type: none;
+}

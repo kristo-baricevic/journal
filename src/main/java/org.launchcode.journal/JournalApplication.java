@@ -27,7 +27,7 @@ public class JournalApplication {
 		mailSender.setHost("smtp.zoho.com");
 		mailSender.setPort(587);
 		mailSender.setUsername("product.pal@zohomail.com");
-		mailSender.setPassword("8RxVVpW3g7EC");
+		mailSender.setPassword("nHHAM0MK5rZU");
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", "true");

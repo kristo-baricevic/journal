@@ -25,7 +25,7 @@
                 <td>
                     <th:block th:if="${not topic.entries.empty}">
                         <ul>
-                            <li th:each="entry : ${topic.entries}">
+                            <li class="no-bullets-list" th:each="entry : ${topic.entries}">
                                 <a th:href="@{'/entries/show/' + ${entry.id}}" th:text="${entry.title}"></a>
                             </li>
                         </ul>

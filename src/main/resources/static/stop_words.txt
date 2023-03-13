@@ -1,4 +1,6 @@
 a
+also
+able
 about
 above
 after
@@ -13,10 +15,12 @@ are
 aren't
 as
 at
+back
 be
 because
 been
 before
+began
 being
 below
 between
@@ -41,6 +45,8 @@ few
 for
 from
 further
+get
+got
 had
 hadn't
 has
@@ -76,7 +82,12 @@ it
 it's
 its
 itself
+just
 let's
+like
+made
+make
+making
 me
 more
 most
@@ -95,11 +106,15 @@ or
 other
 ought
 our
-ours 	ourselves
+ours
+ourselves
 out
 over
 own
+put
+said
 same
+saw
 shan't
 she
 she'd
@@ -110,6 +125,8 @@ shouldn't
 so
 some
 such
+sure
+take
 than
 that
 that's
@@ -143,6 +160,7 @@ we'd
 we'll
 we're
 we've
+went
 were
 weren't
 what
@@ -159,6 +177,7 @@ whom
 why
 why's
 with
+without
 won't
 would
 wouldn't
