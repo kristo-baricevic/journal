@@ -1,5 +1,5 @@
 bootRun {
-	jvmArgs = ['-Xmx4096m']
+	jvmOptions = ['-Xmx4096m']
 }
 
 plugins {
