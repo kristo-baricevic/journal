@@ -37,13 +37,6 @@ public class NlpService {
         Properties props = new Properties();
         props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse, sentiment");
 
-        // Add the MaxentTagger initialization code here
-//        String taggerPath = "english-caseless-left3words-distsim.tagger";
-//        props.setProperty("pos.model", taggerPath);
-//
-//        MaxentTagger tagger = new MaxentTagger(taggerPath);
-//        props.setProperty("pos.tagger", taggerPath);
-
         this.pipeline = new StanfordCoreNLP(props);
     }
 
@@ -69,8 +62,6 @@ public class NlpService {
 
         return namedEntitiesMap;
     }
-
-
 
     public List<String> getKeyPhrases(String text) {
         List<String> nounPhrases = new ArrayList<>();
