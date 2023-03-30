@@ -18,10 +18,8 @@ group = 'org.launchcode'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-java {
-	options {
-		memoryMaximumSize = "4g"
-	}
+bootRun {
+	jvmArgs = ["-Xmx2g"]
 }
 
 configurations {
