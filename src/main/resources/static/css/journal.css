@@ -233,7 +233,6 @@ form
     background-color: white;
     border-radius: 20%:
     box-shadow: 10px 5px 5px red;
-
 }
 .form-control
 {
@@ -344,4 +343,31 @@ footer
 .no-bullets-list
 {
     list-style-type: none;
+}
+@media (max-width: 601px) {
+    .form-group
+    {
+        max-width: 500px;
+        padding: 10px;
+        background-color: white;
+        border-radius: 20%:
+        box-shadow: 10px 5px 5px red;
+    }
+    .field
+    {
+        max-width: 500px;
+        background-color: white;
+        padding: 5px;
+    }
+    .form-control
+    {
+        max-width: 460px;
+        height: 46px;
+        font-size: 16px;
+    }
+    .btn-primary {
+        height: 40px;
+        width: 60px;
+        font-size: 16px;
+    }
 }
