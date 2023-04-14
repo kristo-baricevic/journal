@@ -3,6 +3,13 @@
     padding: 0;
     margin: 0;
 }
+.nav-links-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 .menu-item
 {
     width: 150px;
@@ -27,9 +34,11 @@ body
     box-sizing: border-box;
     font-family: sans-sarif;
     padding: 50px;
+    margin-top: 35px;
 }
 .menu-bar
 {
+    width: 100%;
     font-family: 'Merriweather';
     background-color: #FFAFE9;
     text-align: center;
@@ -43,6 +52,7 @@ body
 .menu-bar ul li
 {
     display: block;
+    position: relative;
     width: 100px;
     margin: 8px;
     padding: 5px;
@@ -64,6 +74,13 @@ body
 .sub-menu-1
 {
     display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #28334AFF;
+    padding: 20px;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 .menu-bar ul li:hover .sub-menu-1
 {
@@ -106,6 +123,13 @@ body
 .sub-menu-2
 {
     display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #28334AFF;
+    padding: 20px;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 .menu-bar ul li:hover .sub-menu-2
 {
@@ -148,6 +172,13 @@ body
 .sub-menu-3
 {
     display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #28334AFF;
+    padding: 20px;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 .menu-bar ul li:hover .sub-menu-3
 {
@@ -376,5 +407,84 @@ footer
         padding: 0px;
         width: 90%
     }
-
+    .icon
+    {
+        position: bottom;
+        padding: 0px;
+    }
+    .menu-item
+    {
+        width: 80px;
+        padding: 0px;
+        border-bottom: 1px;
+        background: transparent;
+        border-radius: 0;
+        text-align: left;
+    }
+    .menu-bar ul {
+        width: 100%;
+        padding: 0;
+      }
+      .menu-bar li {
+        display: inline-block;
+        float: none;
+        margin: 0;
+        padding: 0;
+      }
+      .menu-bar .sub-menu-1,
+      .menu-bar .sub-menu-2,
+      .menu-bar .sub-menu-3 {
+        position: static;
+        display: none;
+        width: 100%;
+      }
+      .menu-bar .sub-menu-1 ul,
+      .menu-bar .sub-menu-2 ul,
+      .menu-bar .sub-menu-3 ul {
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+      .menu-bar .sub-menu-1 li,
+      .menu-bar .sub-menu-2 li,
+      .menu-bar .sub-menu-3 li {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+      }
+      .menu-bar .sub-menu-1 a,
+      .menu-bar .sub-menu-2 a,
+      .menu-bar .sub-menu-3 a {
+        font-size: 14px;
+        padding: 10px;
+      }
+      .menu-bar .sub-menu-1 a:hover,
+      .menu-bar .sub-menu-2 a:hover,
+      .menu-bar .sub-menu-3 a:hover {
+        background-color: #f2f2f2;
+      }
+      /* Adjust margin and padding of the navbar-brand-container */
+        .navbar-brand-container {
+          margin-right: 0.5rem;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        /* Adjust margin and padding of the login and logout buttons */
+        .menu-bar div li:first-child,
+        .menu-bar div li:last-child {
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+          padding-top: 0.25rem;
+          padding-bottom: 0.25rem;
+        }
+        .menu-bar .search
+        {
+            font-size: 10px;
+            color: black;
+            display: flex;
+            width: 150px;
+            margin: 8px;
+            padding: 0px;
+        }
 }
