@@ -367,7 +367,14 @@ footer
     }
     .btn-primary {
         height: 40px;
-        width: 60px;
+        width: 80px;
         font-size: 16px;
     }
+    .entry-table
+    {
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* add box shadow */
+        padding: 0px;
+        width: 90%
+    }
+
 }
