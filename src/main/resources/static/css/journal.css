@@ -9,8 +9,7 @@ body {
     background-color: #FFD3F3;
     box-sizing: border-box;
     font-family: 'Merriweather', serif;
-    padding: 50px;
-    margin-top: 35px;
+    padding: 10px;
 }
 
 .menu-bar
@@ -25,6 +24,7 @@ body {
 .icon {
   width: 24px;
   height: 24px;
+  vertical-align: middle;
 }
 
 
@@ -53,6 +53,8 @@ body {
 .navbar-content {
     display: flex;
     align-items: center;
+    padding: 10px;
+    margin-top:35px;
 }
 .navbar-brand-container
 {
@@ -201,7 +203,6 @@ body {
   border-radius: 5px;
 }
 .entry {
-  background-color: white;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
@@ -219,6 +220,28 @@ body {
 }
 
 /* Responsive Navbar */
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+    line-height: 1.2;
+    padding: 5px;
+  }
+
+.icon {
+  width: 34px;
+  height: 34px;
+  vertical-align: middle;
+}
+
+  .navbar-brand img {
+    margin-right: 8px;
+  }
+}
+
+
+
 @media (min-width: 992px) {
   .navbar-toggler {
     display: none;
@@ -227,6 +250,12 @@ body {
 
 
 @media (max-width: 991.98px) {
+    .navbar .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
   .navbar .navbar-toggler {
     display: block;
   }
@@ -237,5 +266,21 @@ body {
 
   .navbar .navbar-collapse.show {
     display: flex;
+    flex-direction: column;
   }
+
+  .navbar .navbar-nav .nav-item {
+      flex: 1;
+      padding: 0.5rem;
+      text-align: center;
+  }
+
+  .navbar .navbar-nav .nav-link {
+      font-size: 14px;
+  }
+
+    .navbar-nav .dropdown-item {
+        font-size: 14px;
+        padding: 0.5rem 1rem;
+    }
 }
