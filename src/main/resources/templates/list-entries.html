@@ -9,19 +9,19 @@
 <div class="container body-content">
 <table >
     <thead>
-    <tr>
+    <tr class="entry-title">
         <th>Name</th>
         <th>Topic</th>
         <th>Journal Entry</th>
         <th>Mood</th>
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="entry : ${entries}">
-        <td th:text="${entry.name}"></td>
-        <td th:text="${entry.topic.name}"></td>
-        <td th:text="${entry.journalEntry}"></td>
-        <td th:text="${entry.mood.name}"></td>
+    <tbody >
+    <tr class="entry" th:each="entry : ${entries}">
+        <td class="entry-body" th:text="${entry.name}"></td>
+        <td class="entry-body" th:text="${entry.topic.name}"></td>
+        <td class="entry-body" th:text="${entry.journalEntry}"></td>
+        <td class="entry-body" th:text="${entry.mood.name}"></td>
     </tr>
     </tbody>
 </table>

@@ -1,93 +1,107 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
-
 <head th:fragment="head">
     <!-- Bootstrap stylesheets and script -->
     <link th:href="@{/css/journal.css}" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'/>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
     <title th:text="'Dream-Z' + ${title == null ? '' : ' :: ' + title}">Dream-Z</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
-
 <body>
-<div th:fragment="page-header" class="header">
-    <!-- begin drop down buttons-->
-    <div class="menu-bar">
-        <ul>
-            <li class="navbar-brand-container"><a th:href="@{/}" class="navbar-brand"><img class="icon" src="/img/cloud-line.png"/>
-                <br/>Dream-Z</a></li>
-            <div class="nav-links-container">
-                <li style="width: 60px"><a th:href="@{/login}">Login</a></li>
-                <li style="width: 60px"><a th:href="@{/logout}">Logout</a></li>
-            </div>
-                <li><a href="#"><img class="icon" src="/img/moon-cloudy-fill.png"><br/>Add</a>
-                <div class="sub-menu-1">
-                    <ul>
-                        <li><a th:href="@{/entries/add}">Add Entry</a></li>
-                        <li><a th:href="@{/topics/add}">Add Topic</a></li>
-                        <li><a th:href="@{/moods/add}">Add Mood</a></li>
-                    </ul>
-                </div>
-                </li>
-                <li><a href="#"><img class="icon" src="/img/moon-cloudy-line.png"/><br/>Edit</a>
-                <div class="sub-menu-2">
-                    <ul>
-                        <li><a th:href="@{/entries/list}">Edit Entry</a></li>
-                        <li><a th:href="@{/topics/list}">Edit Topic</a></li>
-                        <li><a th:href="@{/moods/list}">Edit Mood</a></li>
-                    </ul>
-                </div>
-                </li>
-                <li><a href="#"><img class="icon" src="/img/cloud-windy-line.png"/><br/>Analysis</a>
-                <div class="sub-menu-3">
-                    <ul>
-                        <li><a th:href="@{/wordcloud}">WordCloud</a></li>
-                        <li><a th:href="@{/analysis}">Analyze</a></li>
-                        <li><a th:href="@{/list-topics}">View by Topic</a></li>
-                        <li><a th:href="@{/list-moods}">View by Mood</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class=".menu-bar search">
-                <form class=".menu-bar search-form" th:action="@{/index/results}" method = "post">
-                    <p class=".menu-bar search-container">
-<!--                        <input-->
-<!--                                type="radio"-->
-<!--                                name="searchType"-->
-<!--                                id="all"-->
-<!--                                value="all"-->
-<!--                                checked="true"/>-->
+<nav th:fragment="page-header" class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- navbar content -->
 
-<!--                        <label for="all">all</label>-->
-                        <input
-                                type="radio"
-                                name="searchType"
-                                id="title"
-                                value="title"/>
-                        <label for="title">title</label>
-                        <input
-                                type="radio"
-                                name="searchType"
-                                id="topic"
-                                value="topic"/>
-                        <label for="topic">topic</label>
-                        <input
-                                type="radio"
-                                name="searchType"
-                                id="mood"
-                                value="mood"/>
-                        <label for="mood">mood</label>
-                    </p>
-                    <label for="searchTerm"></label>
-                    <input type="text" name="searchTerm" id="searchTerm" />
-                    <br />
-                    <input type="submit" value="Search" />
-                </form>
+    <!-- Logo -->
+    <div class="navbar-content">
+    <a class="navbar-brand" th:href="@{/}">
+        <img class="icon" src="/img/cloud-line.png"/>
+        <br/>Dream-Z
+    </a>
+    <!-- Hamburger menu -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navigation links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!-- Login and Logout Nav items -->
+            <div class="nav-login">
+            <li class="nav-item stacked-nav-item">
+                <a class="nav-link d-lg-none d-md-block" th:href="@{/login}">Login</a>
+                <a class="nav-link d-lg-none d-md-block" th:href="@{/logout}">Logout</a>
             </li>
-        </ul>
+            </div>
+
+            <!-- Dropdown menu for 'Add' -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdd" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="icon" src="/img/moon-cloudy-fill.png"/><br/>Add
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownAdd">
+                    <ul>
+                        <li><a class="dropdown-item" th:href="@{/entries/add}">Add Entry</a></li>
+                        <li><a class="dropdown-item" th:href="@{/topics/add}">Add Topic</a></li>
+                        <li><a class="dropdown-item" th:href="@{/moods/add}">Add Mood</a></li>
+                    </ul>
+                </div>
+            </li>
+             <!-- Dropdown menu for 'Edit' -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownEdit" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="icon" src="/img/moon-cloudy-line.png"/><br/>Edit
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownEdit">
+                                <ul>
+                                    <li><a class="dropdown-item" th:href="@{/entries/list}">Edit Entry</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/topics/list}">Edit Topic</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/moods/list}">Edit Mood</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!-- Dropdown menu for 'Analysis' -->
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="analysisDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="icon" src="/img/cloud-windy-line.png"/><br/>Analysis
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="analysisDropdown">
+                                <ul>
+                                    <li><a class="dropdown-item" th:href="@{/wordcloud}">WordCloud</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/analysis}">Analyze</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/list-topics}">View by Topic</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/list-moods}">View by Mood</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!-- search bar -->
+                        <li class="nav-item">
+                            <form class="form-inline ml-auto" th:action="@{/index/results}" method="post">
+                                <div class="form-group">
+                                    <label for="searchType">Search by:</label>
+                                    <select class="form-control ml-2" id="searchType" name="searchType">
+                                        <option value="title" selected>Title</option>
+                                        <option value="topic">Topic</option>
+                                        <option value="mood">Mood</option>
+                                    </select>
+                                </div>
+                                <div class="form-group ml-2">
+                                    <label for="searchTerm" class="sr-only">Search</label>
+                                    <input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="Search"/>
+                                </div>
+                                <button type="submit" class="btn btn-primary ml-2">Search</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
     </div>
-</div>
+</nav>
 </body>
 </html>

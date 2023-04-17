@@ -6,20 +6,20 @@
 
 <div th:replace="fragments :: page-header"></div>
 <center>
-<h2>Journal Entries</h2>
+<h2 class="entry-heading">Journal Entries</h2>
 
 <table class="entry-table">
-    <tr th:each="entry : ${entries}">
+    <tr class="entry-body" th:each="entry : ${entries}">
         <td>
-            <p class="entry-name">
+            <p class="entry-title">
                 Name:
                 <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.title}"></a>
             </p>
-            <p class="entry-topic">
+            <p class="entry-body">
                 Topic:
                 <a th:href="@{'/topics/show/' + ${entry.topic.id}}" th:text="${entry.topic}"></a>
             </p>
-            <p class="entry-topic" th:text="${'Mood: ' + entry.mood}"></p>
+            <p class="entry-body" th:text="${'Mood: ' + entry.mood}"></p>
             <br />
             <p class="entry-body" th:text="${entry.journalEntry}">
             </p>
