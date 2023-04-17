@@ -72,6 +72,10 @@ body {
    display: inline-block;
 }
 
+.stacked-nav-link {
+  display: block;
+}
+
 .navbar-nav .nav-item .nav-link {
   color: black;
 }
