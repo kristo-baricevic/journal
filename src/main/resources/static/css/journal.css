@@ -21,7 +21,7 @@ header {
   background-color: #FFAFE9;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 50px 100px;
+  grid-template-rows: 75px 100px;
   align-items: center;
   border-bottom: 6px;
   border-bottom-style: solid;
@@ -56,12 +56,16 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
-  font-weight: bold;
 }
 
-.navbar .logo img {
-  height: 40px;
+.navbar .icon {
+  height: 36px;
+}
+
+.navbar .navbar-brand {
+  font-weight: bold;
+  font-family: 'Sacramento', cursive;
+  font-size: 32px;
 }
 
 .navbar .login {
@@ -224,8 +228,26 @@ header {
 }
 
 /* Responsive Navbar */
+@media screen and (max-width: 920px) {
+.navbar .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar .icon {
+  height: 24px;
+}
+
+.navbar .navbar-brand {
+  font-weight: bold;
+  font-family: 'Sacramento', cursive;
+  font-size: 24px;
+}
+}
 
 @media screen and (max-width: 767px) {
+
     .search .form-group {
          display: inline-block;
          margin-right: 10px;
@@ -266,6 +288,10 @@ header {
             font-size: 16px;
         }
 
+        .dropdown-analyze .dropdown-content {
+                left: -50px;
+            }
+
   .dropdown {
     position: relative;
   }
@@ -273,6 +299,10 @@ header {
   .dropdown a {
     display: block;
   }
+
+  .dropdown span {
+      font-size: 16px;
+    }
 
   .dropdown-content {
     position: absolute;
@@ -304,7 +334,6 @@ header {
   }
 }
 
-
 @media screen and (min-width: 768px) {
 
   .navbar a {
@@ -320,6 +349,8 @@ header {
   .dropdown:hover .dropdown-content {
     display: block;
   }
+}
+
 @media screen and (max-width: 767px) {
 
    .dropdown-add,
@@ -363,4 +394,23 @@ header {
     background-color: #f1f1f1;
   }
 }
+
+@media screen and (max-width 650px) {
+.navbar .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100px;
 }
+
+.navbar .icon {
+  height: 24px;
+}
+
+.navbar .navbar-brand {
+  font-weight: bold;
+  font-family: 'Sacramento', cursive;
+  font-size: 14px;
+}
+}
+
