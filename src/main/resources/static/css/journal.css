@@ -226,6 +226,46 @@ header {
 /* Responsive Navbar */
 
 @media screen and (max-width: 767px) {
+    .search .form-group {
+         display: inline-block;
+         margin-right: 10px;
+    }
+     .search .form-control {
+         display: inline-block;
+         width: auto;
+         margin-right: 10px;
+    }
+    .search .btn-primary {
+         display: inline-block;
+    }
+    .search label {
+         display: block;
+         margin-bottom: 5px;
+    }
+    .form-group
+        {
+            max-width: 500px;
+            padding: 10px;
+            border-radius: 20%:
+            box-shadow: 10px 5px 5px red;
+        }
+        .field
+        {
+            max-width: 500px;
+            padding: 5px;
+        }
+        .form-control
+        {
+            max-width: 460px;
+            height: 46px;
+            font-size: 16px;
+        }
+        .btn-primary {
+            height: 40px;
+            width: 80px;
+            font-size: 16px;
+        }
+
   .dropdown {
     position: relative;
   }
@@ -281,6 +321,7 @@ header {
     display: block;
   }
 @media screen and (max-width: 767px) {
+
    .dropdown-add,
      .dropdown-edit,
      .dropdown-analyze {
