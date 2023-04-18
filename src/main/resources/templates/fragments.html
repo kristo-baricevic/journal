@@ -11,107 +11,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-<nav th:fragment="page-header" class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- navbar content -->
 
-    <!-- Logo -->
-    <div class="navbar-content">
-    <a class="navbar-brand" th:href="@{/}">
-        <img class="icon" src="/img/cloud-line.png"/>
-        Dream-Z
-    </a>
-    <!-- Hamburger menu -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-        </button>
-
-        <!-- Navigation links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <!-- Login and Logout Nav items -->
-            <div class="nav-login">
-            <li class="nav-item stacked-nav-item">
-                <a class="nav-link stacked-nav-link" th:href="@{/login}">Login</a>
-                <a class="nav-link stacked-nav-link" th:href="@{/logout}">Logout</a>
-            </li>
-            </div>
-
-            <!-- Dropdown menu for 'Add' -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdd" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="nav-item-content">
-                        <img class="icon" src="/img/moon-cloudy-fill.png"/><br/>Add
-                    </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownAdd">
-                    <ul>
-                        <li><a class="dropdown-item" th:href="@{/entries/add}">Add Entry</a></li>
-                        <li><a class="dropdown-item" th:href="@{/topics/add}">Add Topic</a></li>
-                        <li><a class="dropdown-item" th:href="@{/moods/add}">Add Mood</a></li>
-                    </ul>
-                </div>
-            </li>
-             <!-- Dropdown menu for 'Edit' -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownEdit" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="nav-item-content">
-                                    <img class="icon" src="/img/moon-cloudy-line.png"/><br/>Edit
-                                </span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownEdit">
-                                <ul>
-                                    <li><a class="dropdown-item" th:href="@{/entries/list}">Edit Entry</a></li>
-                                    <li><a class="dropdown-item" th:href="@{/topics/list}">Edit Topic</a></li>
-                                    <li><a class="dropdown-item" th:href="@{/moods/list}">Edit Mood</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <!-- Dropdown menu for 'Analysis' -->
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" id="analysisDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="nav-item-content">
-                                    <img class="icon" src="/img/cloud-windy-line.png"/><br/>Analysis
-                                </span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="analysisDropdown">
-                                <ul>
-                                    <li><a class="dropdown-item" th:href="@{/wordcloud}">WordCloud</a></li>
-                                    <li><a class="dropdown-item" th:href="@{/analysis}">Analyze</a></li>
-                                    <li><a class="dropdown-item" th:href="@{/list-topics}">View by Topic</a></li>
-                                    <li><a class="dropdown-item" th:href="@{/list-moods}">View by Mood</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <!-- search bar -->
-                        <li class="nav-item">
-                            <form class="form-inline ml-auto" th:action="@{/index/results}" method="post">
-                                <div class="form-group">
-                                    <label for="searchType">Search by:</label>
-                                    <select class="form-control ml-2" id="searchType" name="searchType">
-                                        <option value="title" selected>Title</option>
-                                        <option value="topic">Topic</option>
-                                        <option value="mood">Mood</option>
-                                    </select>
-                                </div>
-                                <div class="form-group ml-2">
-                                    <label for="searchTerm" class="sr-only">Search</label>
-                                    <input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="Search"/>
-                                </div>
-                                <button type="submit" class="btn btn-primary ml-2">Search</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+<nav th:fragment="page-header" class="navbar">
+    <!-- logo -->
+    <div class="logo">
+        <img class="icon" src="/img/cloud-line.png" alt="Logo" />
+        <a class="navbar-brand" th:href="@{/}">
+            Dream-Z
+        </a>
     </div>
+    <!-- login and logout -->
+    <div class="login">
+        <a class="nav-link stacked-nav-link" th:href="@{/login}">Login</a>
+        <a class="nav-link stacked-nav-link" th:href="@{/logout}">Logout</a>
+    </div>
+    <!-- begin drop down buttons -->
+
+    <!-- Add -->
+    <div class="dropdown dropdown-add">
+        <a href="#">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add</span>
+        </a>
+        <div class="dropdown-content">
+            <a th:href="@{/entries/add}">Add Entry</a>
+            <a th:href="@{/topics/add}">Add Topic</a>
+            <a th:href="@{/moods/add}">Add Mood</a>
+        </div>
+    </div>
+    <!-- Edit -->
+    <div class="dropdown dropdown-edit">
+        <a href="#">
+            <i class="fas fa-edit"></i>
+            <span>Edit</span>
+        </a>
+        <div class="dropdown-content">
+            <a th:href="@{/entries/list}">Edit Entry</a>
+            <a th:href="@{/topics/list}">Edit Topic</a>
+            <a th:href="@{/moods/list}">Edit Mood</a>
+        </div>
+    </div>
+    <!-- Analyze -->
+    <div class="dropdown dropdown-analyze">
+        <a href="#">
+            <i class="fas fa-eye"></i>
+            <span>Analyze</span>
+        </a>
+        <div class="dropdown-content">
+            <a th:href="@{/wordcloud}">Wordcloud</a>
+            <a href="@{/analyze}">Language Tools</a>
+            <a th:href="@{/list-topics}">View by Topic</a>
+            <a th:href="@{/list-moods}">View by Mood</a>
+        </div>
+    </div>
+    <!-- search bar -->
+    <form class="form-inline search" th:action="@{/index/results}" method="post">
+        <div class="form-group">
+            <label for="searchType">Search by:</label>
+            <select class="form-control ml-2" id="searchType" name="searchType">
+                <option value="title" selected>Title</option>
+                <option value="topic">Topic</option>
+                <option value="mood">Mood</option>
+            </select>
+        </div>
+        <div class="form-group ml-2">
+            <label for="searchTerm" class="sr-only">Search</label>
+            <input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="Search"/>
+        </div>
+            <button type="submit" class="btn btn-primary ml-2">Search</button>
+    </form>
 </nav>
 </body>
 </html>
