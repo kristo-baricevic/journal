@@ -21,7 +21,7 @@ header {
   background-color: #FFAFE9;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 50px 30px;
+  grid-template-rows: 50px 100px;
   align-items: center;
 }
 
@@ -41,7 +41,7 @@ header {
 }
 
 .navbar .search {
-  grid-column: 1 / -1;
+  grid-column: 2/6;
   grid-row: 2;
   text-align: left;
   padding-right: 20px;
@@ -50,10 +50,6 @@ header {
 }
 
 .navbar .logo {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 3;
   display: flex;
   justify-content: center;
   align-items: center;
