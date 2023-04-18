@@ -23,6 +23,10 @@ header {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 50px 100px;
   align-items: center;
+  border-bottom: 6px;
+  border-bottom-style: solid;
+  border-bottom-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .navbar a {
@@ -181,10 +185,16 @@ header {
 }
 
 /* Entry card styles */
+.heading-container {
+    width: 30%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
 .entry-heading {
-  background-color: gray;
+  background-color: #D3D3D3;
   font-size: 24px;
   font-weight: bold;
+  margin-top:10px;
   margin-bottom: 10px;
 }
 
@@ -209,6 +219,8 @@ header {
 
 .entry-body {
   font-size: 16px;
+  padding: 5px;
+  border-bottom: 8px solid #FFD3F3;
 }
 
 /* Responsive Navbar */

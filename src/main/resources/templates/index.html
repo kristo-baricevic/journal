@@ -6,7 +6,9 @@
 
 <div th:replace="fragments :: page-header"></div>
 <center>
-<h2 class="entry-heading">Journal Entries</h2>
+    <div class="heading-container">
+        <h2 class="entry-heading">Journal Entries</h2>
+    </div>
 
 <table class="entry-table">
     <tr class="entry-body" th:each="entry : ${entries}">
@@ -15,11 +17,11 @@
                 Name:
                 <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.title}"></a>
             </p>
-            <p class="entry-body">
+            <p class="entry-title">
                 Topic:
                 <a th:href="@{'/topics/show/' + ${entry.topic.id}}" th:text="${entry.topic}"></a>
             </p>
-            <p class="entry-body" th:text="${'Mood: ' + entry.mood}"></p>
+            <p class="entry-title" th:text="${'Mood: ' + entry.mood}"></p>
             <br />
             <p class="entry-body" th:text="${entry.journalEntry}">
             </p>
