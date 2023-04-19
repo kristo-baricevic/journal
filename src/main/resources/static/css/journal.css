@@ -242,10 +242,15 @@ header {
   font-weight: bold;
   font-family: 'Sacramento', cursive;
   font-size: 18px;
+  align-text: center;
 }
 }
 
 @media screen and (max-width: 767px) {
+
+.navbar {
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+}
 
 .dropdown-icon, .dropdown-text {
     display: flex;
@@ -306,8 +311,8 @@ header {
   }
 
   .dropdown span {
-      font-size: 16px;
-    }
+    font-size: 16px;
+  }
 
   .dropdown-content {
     position: absolute;
@@ -403,6 +408,7 @@ header {
 @media screen and (max-width: 650px) {
     .navbar .login a {
       margin-top: 5px;
+      margin-left: 5px;
       font-size: 14px;
       padding: 0px;
     }
@@ -435,19 +441,19 @@ header {
 
     .navbar .search .form-group {
         display: flex;
-        width: calc(75% - 5px);
         margin-right: 5px;
     }
 
     .navbar .search .form-control {
         display: inline-block;
-        width: calc(75% - 5px);
+        width: 80%;
         margin-right: 5px;
     }
 
     .navbar .search .btn-primary {
-        width: 60px;
+        width: 100px;
         margin-top: 1rem;
+        padding: 5px;
     }
 
     .navbar .search label {
