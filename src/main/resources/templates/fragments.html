@@ -16,10 +16,12 @@
 <nav th:fragment="page-header" class="navbar">
     <!-- logo -->
     <div class="logo">
-        <img class="icon" src="/img/cloud-line.png" alt="Logo" />
-        <a class="navbar-brand" th:href="@{/}">
-            Dream-Z
-        </a>
+        <div class="logo-icon">
+            <img class="icon" src="/img/cloud-line.png" alt="Logo" />
+        </div>
+        <div class="logo-text">
+            <a class="navbar-brand" th:href="@{/}">Dream-Z </a>
+        </div>
     </div>
     <!-- login and logout -->
     <div class="login">
@@ -31,8 +33,12 @@
     <!-- Add -->
     <div class="dropdown dropdown-add">
         <a href="#">
-            <img class="icon" src="/img/cloud-windy-line.png" alt="Add Button" />
-            <span>Add</span>
+            <div class="dropdown-icon">
+                <img class="icon" src="/img/cloud-windy-line.png" alt="Add Button" />
+            </div>
+            <div class="dropdown-text">
+                <span>Add</span>
+            </div>
         </a>
         <div class="dropdown-content">
             <a th:href="@{/entries/add}">Add Entry</a>
@@ -43,8 +49,12 @@
     <!-- Edit -->
     <div class="dropdown dropdown-edit">
         <a href="#">
-            <img class="icon" src="/img/moon-cloudy-fill.png" alt="Edit Button" />
-            <span>Edit</span>
+            <div class="dropdown-icon">
+                <img class="icon" src="/img/moon-cloudy-fill.png" alt="Edit Button" />
+            </div>
+            <div class="dropdown-text">
+                <span>Edit</span>
+            </div>
         </a>
         <div class="dropdown-content">
             <a th:href="@{/entries/list}">Edit Entry</a>
@@ -55,8 +65,12 @@
     <!-- Analyze -->
     <div class="dropdown dropdown-analyze">
         <a href="#">
-            <img class="icon" src="/img/moon-cloudy-fill.png" alt="Analyze Button" />
-            <span>Analyze</span>
+            <div class="dropdown-icon">
+                <img class="icon" src="/img/moon-cloudy-fill.png" alt="Analyze Button" />
+            </div>
+            <div class="dropdown-text">
+                <span>Analyze</span>
+            </div>
         </a>
         <div class="dropdown-content">
             <a th:href="@{/wordcloud}">Wordcloud</a>
