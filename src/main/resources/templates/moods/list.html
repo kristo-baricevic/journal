@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container body-content">    <meta charset="UTF-8">
-<center>
-<div align="center">
-    <title>List Mood</title>
-    <nav th:replace="fragments :: page-header"></nav>
+<body>    <meta charset="UTF-8">
+<nav th:replace="fragments :: page-header"></nav>
+
+<div class="table-container">
+
     <h1> List Mood </h1>
     <br/>
-    <table class="centeredTable">
-        <thead class="">
-        <tr>
-            <th>Mood Name</th>
-            <th>Action</th>
+    <table class="entry-table">
+        <thead>
+        <tr class="heading-container">
+            <th class="entry-heading">Mood Name</th>
+            <th class="entry-heading">Action</th>
         </tr>
         </thead>
         <div th:if="${message}" th:text="${message}"></div>
-
-
-        <tbody>
+        <tbody class="entry">
         <th:block th:each="mood: ${listMood}">
             <tr>
-
                 <td><a th:href="@{'/moods/show/' + ${mood.id}}" th:text="${mood.name}"></a></td>
-
-
                 <td>
                     <a  th:href="@{'/moods/edit/'+ ${mood.id}}">Edit</a>
                     <form th:action="@{/moods/delete}" method="post">
                         <input type="hidden" name="id" th:value="${mood.id}"/>
                         <input type="submit" value="Delete"/>
                     </form>
-
                 </td>
             </tr>
         </th:block>

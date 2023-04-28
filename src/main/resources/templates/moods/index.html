@@ -2,10 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
 </head>
-<body class="container body-content">
+<body>
 
 <div th:replace="fragments :: page-header"></div>
-<center>
 <p th:unless="${moods} and ${moods.size()}">no Moods yet, why don't ya make one ?!</p>
 
 <div class="container body-content">

@@ -1,37 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container body-content">    <meta charset="UTF-8">
-<div align="center">
-    <title>List Topic</title>
-    <nav th:replace="fragments :: page-header"></nav>
-    <center>
+<body>    <meta charset="UTF-8">
+<nav th:replace="fragments :: page-header"></nav>
+<div class="table-container">
     <h1> List Topic </h1>
     <br/>
-    <table class="centeredTable">
-        <thead class="">
-        <tr>
-            <th>Topic Name</th>
-            <th>Action</th>
+    <table class="entry-table">
+        <thead>
+        <tr class="heading-container">
+            <th class="entry-heading">Topic Name</th>
+            <th class="entry-heading">Action</th>
         </tr>
         </thead>
         <div th:if="${message}" th:text="${message}"></div>
-
-
-        <tbody>
+        <tbody class="entry">
         <th:block th:each="topic: ${listTopic}">
             <tr>
-
                 <td><a th:href="@{'/topics/show/' + ${topic.id}}" th:text="${topic.name}"></a></td>
-
-
                 <td>
                     <a  th:href="@{'/topics/edit/'+ ${topic.id}}">Edit</a>
                     <form th:action="@{/topics/delete}" method="post">
                         <input type="hidden" name="id" th:value="${topic.id}"/>
                         <input type="submit" value="Delete"/>
                     </form>
-
                 </td>
             </tr>
         </th:block>

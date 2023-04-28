@@ -9,6 +9,7 @@ body {
     box-sizing: border-box;
     font-family: 'Merriweather', serif;
     padding: 10px;
+    text-align: center;
 }
 
 header {
@@ -186,6 +187,13 @@ header {
   background-color: #f1f1f1;
 }
 
+/* Misc */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Entry card styles */
 .heading-container {
     width: 30%;
@@ -204,6 +212,8 @@ header {
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  text-align: center;
+  margin: auto;
 }
 
 .entry {
@@ -223,6 +233,20 @@ header {
   font-size: 16px;
   padding: 5px;
   border-bottom: 8px solid #FFD3F3;
+}
+
+.form-input {
+    width: 80%;
+}
+
+.btn-primary {
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    height: 40px;
+    width: 80px;
+    font-size: 16px;
+    border: 2px solid white
 }
 
 /* Responsive Navbar */
@@ -249,99 +273,89 @@ header {
 @media screen and (max-width: 767px) {
 
 .navbar {
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
 }
 
 .dropdown-icon, .dropdown-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-    .search .form-group {
-         display: inline-block;
-         margin-right: 10px;
-    }
-     .search .form-control {
-         display: inline-block;
-         width: auto;
-         margin-right: 10px;
-    }
-    .search .btn-primary {
-         display: inline-block;
-    }
-    .search label {
-         display: block;
-         margin-bottom: 5px;
-    }
-    .form-group
-        {
-            max-width: 500px;
-            padding: 10px;
-            border-radius: 20%:
-            box-shadow: 10px 5px 5px red;
-        }
-        .field
-        {
-            max-width: 500px;
-            padding: 5px;
-        }
-        .form-control
-        {
-            max-width: 460px;
-            height: 46px;
-            font-size: 16px;
-        }
-        .btn-primary {
-            height: 40px;
-            width: 80px;
-            font-size: 16px;
-        }
+.search-form-group {
+  display: inline-block;
+  margin-right: 10px;
+}
+.search-form-control {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+}
+.search-type {
 
-        .dropdown-analyze .dropdown-content {
-                left: -50px;
-            }
+}
 
-  .dropdown {
-    position: relative;
-  }
-
-  .dropdown a {
-    display: block;
-  }
-
-  .dropdown span {
+.search .btn-primary {
+  display: inline-block;
+}
+.search label {
+   display: block;
+   margin-bottom: 5px;
+}
+.form-group
+{
+   padding: 10px;
+   border-radius: 20%:
+   box-shadow: 10px 5px 5px red;
+}
+.field
+{
+    max-width: 500px;
+    padding: 5px;
+}
+.form-control
+{
+    max-width: 80%;
+    height: 46px;
     font-size: 16px;
-  }
+}
 
-  .dropdown-content {
+.dropdown-analyze .dropdown-content {
+    left: -50px;
+}
+.dropdown {
+    position: relative;
+}
+.dropdown a {
+    display: block;
+ }
+.dropdown span {
+    font-size: 16px;
+}
+.dropdown-content {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     z-index: 1;
     display: none;
     padding: 0;
-  }
-
-  .dropdown:hover .dropdown-content {
+}
+.dropdown:hover .dropdown-content {
     display: block;
-  }
-
-  .dropdown-content a {
+}
+.dropdown-content a {
     color: black;
     padding: 6px 16px;
     text-decoration: none;
     display: block;
     border-bottom: 1px solid #ccc;
-  }
-
-  .dropdown-content a:last-child {
+}
+.dropdown-content a:last-child {
     border-bottom: none;
-  }
-
-  .dropdown-content a:hover {
+}
+.dropdown-content a:hover {
     background-color: #f1f1f1;
-  }
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -360,6 +374,33 @@ header {
     display: block;
   }
 }
+
+
+/* Add Entry Page */
+
+.add-form {
+    padding: 12px 20px;
+    box-sizing: border-box;
+}
+
+
+.add-form .form-group{
+
+}
+
+.add-form-control {
+    width: 80%;
+    margin-right: 5px;
+}
+
+.add-form-title-group{
+
+}
+
+.add-title{
+
+}
+
 
 @media screen and (max-width: 767px) {
 
@@ -454,6 +495,7 @@ header {
         width: 100px;
         margin-top: 1rem;
         padding: 5px;
+
     }
 
     .navbar .search label {

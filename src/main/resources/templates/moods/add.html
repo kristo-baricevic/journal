@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container body-content">
+<body>
 <div th:replace="fragments :: page-header"></div>
-<center>
+
 <h1>Add Mood</h1>
 
 <form method="post" style="max-width:600px;">
@@ -13,8 +13,7 @@
     <span th:errors="${mood.name}" class="error"></span>
   </div>
 
-  <input type="submit" value="Add Mood" />
+  <input class="btn-primary" type="submit" value="Add Mood" />
 </form>
-</center>
 </body>
 </html>

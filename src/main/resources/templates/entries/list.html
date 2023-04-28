@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container body-content">    <meta charset="UTF-8">
-<center>
-<div align="center">
+<body>    <meta charset="UTF-8">
+
+<div class="table-container">
     <title>Journal Entries</title>
     <nav th:replace="fragments :: page-header"></nav>
     <h1> Journal Entries </h1>
     <br/>
-    <table class="centeredTable">
-        <thead class="">
-        <tr>
-            <th>Title</th>
-            <th>Action</th>
+    <table class="entry-table">
+        <thead>
+        <tr class="heading-container">
+            <th class="entry-heading">Title</th>
+            <th class="entry-heading">Action</th>
         </tr>
         </thead>
         <div th:if="${message}" th:text="${message}"></div>
-
-
-        <tbody>
+        <tbody class="entry">
         <th:block th:each="entry: ${listEntry}">
             <tr>
-
                 <td><a th:href="@{'/entries/show/' + ${entry.id}}" th:text="${entry.title}"></a></td>
-
-
                 <td>
                     <a  th:href="@{'/entries/edit/'+ ${entry.id}}">Edit</a>
                     <form th:action="@{/entries/delete}" method="post">
                         <input type="hidden" name="id" th:value="${entry.id}"/>
                         <input type="submit" value="Delete"/>
                     </form>
-
                 </td>
             </tr>
         </th:block>
         </tbody>
     </table>
-
 </div>
-
-
-</center>
 </body>
 </html>

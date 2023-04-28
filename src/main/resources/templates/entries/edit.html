@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container body-content">
+<body>
 <div th:replace="fragments :: page-header"></div>
-<center>
 <h1>Edit Mood</h1>
 
 <form th:action="@{/entries/edit/{id}(id=${entry.id})}" method="post" style="max-width:600px;">
@@ -19,8 +18,7 @@
     <span th:errors="${entry.journalEntry}" class="error"></span>
   </div>
 
-  <input type="submit" value="Edit Entry" />
+  <input class="btn-primary" type="submit" value="Edit Entry" />
 </form>
-</center>
 </body>
 </html>

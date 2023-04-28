@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <label th:for="Entry">What would you like to write about?</label>
-            <textarea class="form-control" rows="20" cols="100" th:field="${entry.journalEntry}" />
+            <textarea class="add-form-control" rows="20" cols="50" th:field="${entry.journalEntry}" />
             <span th:errors="${entry.journalEntry}" class="error"></span>
         </div>
 
