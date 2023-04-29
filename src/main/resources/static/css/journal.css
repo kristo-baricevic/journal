@@ -63,6 +63,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
 .navbar .icon {
@@ -81,6 +82,7 @@ ul {
   justify-content: center;
   align-items: center;
   margin-right: 20px;
+  padding: 10px;
 }
 
 .navbar .login a {
@@ -107,6 +109,7 @@ ul {
 
 .dropdown-add {
   position: relative;
+  padding: 10px;
 }
 
 .dropdown-add .dropdown-content {
@@ -137,6 +140,7 @@ ul {
 
 .dropdown-edit {
   position: relative;
+  padding: 10px;
 }
 
 .dropdown-edit .dropdown-content {
@@ -167,6 +171,7 @@ ul {
 
 .dropdown-analyze {
   position: relative;
+  padding: 10px;
 }
 
 .dropdown-analyze .dropdown-content {
@@ -203,6 +208,7 @@ ul {
 }
 
 .search-container {
+    padding: 10px;
 
 }
 
