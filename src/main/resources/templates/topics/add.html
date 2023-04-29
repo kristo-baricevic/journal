@@ -3,8 +3,12 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <div th:replace="fragments :: page-header"></div>
-<h1>Add Topic</h1>
 
+<div>
+    <div>
+<h1>Add Topic</h1>
+    </div>
+<div>
 <form method="post" style="max-width:600px;">
     <div class="form-group">
         <label th:for="name">Topic Name</label>
@@ -14,5 +18,7 @@
 
     <input class="btn-primary" type="submit" value="Add Topic" />
 </form>
+</div>
+</div>
 </body>
 </html>

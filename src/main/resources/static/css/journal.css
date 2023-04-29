@@ -302,6 +302,9 @@ header {
    display: block;
    margin-bottom: 5px;
 }
+ul {
+  list-style-type: none;
+}
 .form-group
 {
    padding: 10px;

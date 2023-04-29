@@ -2,21 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
 </head>
-<body class="container body-content">    <meta charset="UTF-8">
-<div align="center">
+<body>    <meta charset="UTF-8">
+<div>
     <title>List Entries By Mood</title>
     <nav th:replace="fragments :: page-header"></nav>
     <h1> List Entries By Mood </h1>
     <br/>
-    <table class="centeredTable">
-        <thead class="">
+    <table class="entry-table">
+        <thead class="heading-container">
         <tr>
-            <th>Mood Name</th>
-            <th>Entries</th>
+            <th class="entry-heading">Mood Name</th>
+            <th class="entry-heading">Entries</th>
         </tr>
         </thead>
         <div th:if="${message}" th:text="${message}"></div>
-        <tbody>
+        <tbody class="entry">
         <th:block th:each="mood: ${moods}">
             <tr>
                 <td>

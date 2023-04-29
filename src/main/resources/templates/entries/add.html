@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container body-content">
+<body>
 
-<nav th:replace="fragments :: page-header"></nav>
-<center>
+<div th:replace="fragments :: page-header"></div>
     <h1>Add Journal Entry</h1>
-
+<div>
     <form method="post" style="max-width:600px;">
         <div class="form-group">
             <label th:for="title">Title</label>
@@ -42,6 +41,6 @@
 
         <input type="submit" value="Add Entry" />
     </form>
-</center>
+</div>
 </body>
 </html>

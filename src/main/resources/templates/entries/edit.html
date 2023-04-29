@@ -3,8 +3,8 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <div th:replace="fragments :: page-header"></div>
+<div>
 <h1>Edit Mood</h1>
-
 <form th:action="@{/entries/edit/{id}(id=${entry.id})}" method="post" style="max-width:600px;">
   <div class="form-group">
     <label th:for="name">Entry Title</label>
@@ -20,5 +20,6 @@
 
   <input class="btn-primary" type="submit" value="Edit Entry" />
 </form>
+</div>
 </body>
 </html>
