@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container  body-content">
+<body>
 
-<nav th:replace="fragments :: page-header"></nav>
+<div th:replace="fragments :: page-header"></div>
 
   <title>Entry Analysis</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -76,8 +76,10 @@ $('#analysis-data-form').submit(function(event) {
 
 </script>
 
-<center>
-<h1>Generate Analysis</h1>
+<div>
+    <h1>Generate Analysis</h1>
+</div>
+<div>
 <form method="post" th:action="@{/analysis}" id="analysis-data-form">
     <div th:each="entry : ${entries}">
       <label>
@@ -93,9 +95,9 @@ $('#analysis-data-form').submit(function(event) {
     </select>
     <button id="analysis-submit-button" type="submit">Analyze</button>
 </form>
+</div>
     <div id="analysis_results_container" style="display:none;">
         <div id="analysis_results"></div>
     </div>
-</center>
 </body>
 </html>

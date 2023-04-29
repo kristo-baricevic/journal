@@ -3,10 +3,8 @@
 <head th:replace="fragments :: head">
 </head>
 <body>
-
 <div th:replace="fragments :: page-header"></div>
 <p th:unless="${moods} and ${moods.size()}">no Moods yet, why don't ya make one ?!</p>
-
 <div class="container body-content">
     <h2>Moods</h2>
     <ul>
@@ -15,9 +13,6 @@
         </li>
     </ul>
     <a th:href="@{'/moods/add'}">Add Mood</a>
-
-
 </div>
-</center>
 </body>
 </html>

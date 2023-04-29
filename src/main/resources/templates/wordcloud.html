@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-
-<body class="container  body-content">
-
-<nav th:replace="fragments :: page-header"></nav>
-<center>
+<body>
+<div th:replace="fragments :: page-header"></div>
+<div>
   <title>Generate Word Cloud</title>
+</div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
+  <script>
     $(document).ready(function() {
         // Handle form submission
         $('form').submit(function(event) {
@@ -44,14 +43,17 @@
               },
             error: function() {
             alert('Error generating word cloud');
-    }
-});
         }
-    });
+      });
+    }
+  });
 </script>
 
-<h1>Generate Word Cloud</h1>
-<form method="post" th:action="@{/wordcloud}">
+<div>
+  <h1>Generate Word Cloud</h1>
+</div>
+  <div>
+  <form class="form-group" method="post" th:action="@{/wordcloud}">
     <div th:each="entry : ${entries}">
       <label>
         <input type="checkbox" th:name="entryIds[]" th:value="${entry.id}">
@@ -60,10 +62,11 @@
     </div>
   <button type="submit">Generate</button>
 </form>
+    </div>
 <div id="word_cloud_image_container" style="display:none">
   <h2>Word Cloud</h2>
   <img id="word_cloud_image" src="" width="600" height="400">
 </div>
-</center>
+</div>
 </body>
 </html>
