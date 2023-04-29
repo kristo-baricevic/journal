@@ -11,9 +11,10 @@
     <title th:text="'Dream-Z' + ${title == null ? '' : ' :: ' + title}">Dream-Z</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
-<body>
-
+<body class="navbar-body">
 <nav th:fragment="page-header" class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-toprow">
     <!-- logo -->
     <div class="logo">
         <div class="logo-icon">
@@ -79,22 +80,24 @@
             <a th:href="@{/list-moods}">View by Mood</a>
         </div>
     </div>
+        </div>
     <!-- search bar -->
-    <form class="search" th:action="@{/index/results}" method="post">
-        <div class="search-form-group">
-            <label for="searchType">Search by:</label>
-            <select class="search-form-control" id="searchType" name="searchType">
-                <option value="title" selected>Title</option>
-                <option value="topic">Topic</option>
-                <option value="mood">Mood</option>
-            </select>
+        <div class="navbar-row2">
+            <div class="search-container">
+                    <form class="search" th:action="@{/index/results}" method="post">
+                            <label for="searchType">Search by:</label>
+                            <select class="search-form-control" id="searchType" name="searchType">
+                                <option value="title" selected>Title</option>
+                                <option value="topic">Topic</option>
+                                <option value="mood">Mood</option>
+                            </select>
+                            <label for="searchTerm" class="search-type">Search</label>
+                            <input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="Search"/>
+                            <button type="submit" class="btn btn-primary ml-2">Search</button>
+                    </form>
+            </div>
         </div>
-        <div class="search-form-group">
-            <label for="searchTerm" class="search-type">Search</label>
-            <input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="Search"/>
-        </div>
-            <button type="submit" class="btn btn-primary ml-2">Search</button>
-    </form>
+    </div>
 </nav>
 </body>
 </html>

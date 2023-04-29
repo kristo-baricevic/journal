@@ -6,19 +6,18 @@
 
 <div>
     <div>
-<h1>Add Topic</h1>
+        <h1>Add Topic</h1>
     </div>
-<div>
-<form method="post" style="max-width:600px;">
-    <div class="form-group">
-        <label th:for="name">Topic Name</label>
-            <input class="form-control" th:field="${topic.name}" />
-        <span th:errors="${topic.name}" class="error"></span>
+    <div class="container">
+        <form method="post" style="max-width:600px;">
+            <div class="form-group">
+                <label th:for="name">Topic Name</label>
+                <input class="form-control" th:field="${topic.name}" />
+                <span th:errors="${topic.name}" class="error"></span>
+            </div>
+            <input class="btn-primary" type="submit" value="Add Topic" />
+        </form>
     </div>
-
-    <input class="btn-primary" type="submit" value="Add Topic" />
-</form>
-</div>
 </div>
 </body>
 </html>

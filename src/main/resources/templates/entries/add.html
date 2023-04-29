@@ -4,24 +4,26 @@
 <body>
 
 <div th:replace="fragments :: page-header"></div>
-    <h1>Add Journal Entry</h1>
 <div>
-    <form method="post" style="max-width:600px;">
-        <div class="form-group">
-            <label th:for="title">Title</label>
-            <input class="form-control" th:field="${entry.title}" />
+    <div>
+        <h1>Add Journal Entry</h1>
+    </div>
+    <div class="container">
+        <form method="post" style="max-width:600px;">
+            <div class="form-group">
+                <label th:for="title">Title</label>
+                <input class="form-control" th:field="${entry.title}" />
+            </div>
 
-        </div>
-
-        <div class="form-group">
-            <label th:for="topic">Topics</label>
-            <select name="topic_id">
-                <option th:each="topic : ${topics}"
-                        th:text="${topic.name}"
-                        th:value="${topic.id}"></option>
-            </select>
-            <a th:href="@{'/topics/add'}">Add Topic</a>
-        </div>
+            <div class="form-group">
+                <label th:for="topic">Topics</label>
+                    <select name="topic_id">
+                        <option th:each="topic : ${topics}"
+                            th:text="${topic.name}"
+                            th:value="${topic.id}"></option>
+                    </select>
+                <a th:href="@{'/topics/add'}">Add Topic</a>
+            </div>
 
         <div class="form-group">
             <label th:for="Entry">What would you like to write about?</label>
@@ -41,6 +43,7 @@
 
         <input type="submit" value="Add Entry" />
     </form>
+</div>
 </div>
 </body>
 </html>
