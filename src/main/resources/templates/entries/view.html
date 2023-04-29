@@ -2,18 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container body-content">
-<h1 th:text="${'Entry: ' + journalEntry.name}">Entries</h1>
+<body>
+    <nav th:replace="fragments :: page-header"></nav>
+<div class="entry-body">
+    <div class="heading-container">
+        <h1 th:text="${'Entry: ' + journalEntry.name}">Entries</h1>
+    </div>
 
-<nav th:replace="fragments :: page-header"></nav>
-
-<div class="entry-listing">
-    <p th:text="${'Entry: ' + entry.title}"></p>
-    <p> Entries:
-    <ul>
-        <li th:each="entry : ${entries}">
-            <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.title}"></a>
-        </li>
-    </ul>
-    </p>
+    <div class="entry-table">
+        <div class="entry-title">
+            <p th:text="${'Entry: ' + entry.title}"></p>
+        </div>
+        <div class="entry-title">
+            <p class="entry"> Entries:
+                <ul>
+                    <li th:each="entry : ${entries}">
+                        <a th:href="@{'/view/' + ${entry.id}}" th:text="${entry.title}"></a>
+                    </li>
+                </ul>
+            </p>
+        </div>
+    </div>
 </div>
+</body>
+</html>

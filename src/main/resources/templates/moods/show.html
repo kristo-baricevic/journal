@@ -2,13 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 
-<body class="container  body-content">
-<center>
+<body>
 <div th:replace="fragments :: page-header"></div>
-<h1 th:text="${'Mood Name: ' + mood.name}"></h1>
-<p th:text="${'Mood ID: ' + mood.id}"></p>
-<br>
-<a th:href="@{/}">Back to Home</a>
-</center>
+<div class="entry-table">
+    <div>
+        <h1 class="entry-title" th:text="${'Mood Name: ' + mood.name}"></h1>
+    </div>
+    <div>
+        <p class="entry-title" th:text="${'Mood ID: ' + mood.id}"></p>
+    </div>
+    <div>
+        <a th:href="@{/}">Back to Home</a>
+    </div>
+</div>
 </body>
 </html>

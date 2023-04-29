@@ -2,11 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 
-<body class="container  body-content">
+<body>
 <div th:replace="fragments :: page-header"></div>
-<h1 th:text="${'Title: ' + entry.title}"></h1>
-<p th:text="${'Entry: ' + entry.journalEntry}"></p>
+<div class="entry-table">
+    <div class="entry-heading">
+        <h1 th:text="${'Title: ' + entry.title}"></h1>
+    </div>
+    <div>
+        <p th:text="${'Entry: ' + entry.journalEntry}"></p>
+    </div>
 <br>
-<a th:href="@{/}">Back to Home</a>
+    <div>
+        <a th:href="@{/}">Back to Home</a>
+    </div>
+</div>
 </body>
 </html>

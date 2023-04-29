@@ -4,11 +4,21 @@
 </head>
 <body>
 <div th:replace="fragments :: page-header"></div>
-<h1 th:text="${'Topic Name: ' + topic.name}"></h1>
-<p th:text="${'Topic ID: ' + topic.id}"></p>
-<a th:href="@{/topics/list}">List All Topics</a>
-<br>
-<a th:href="@{/}">Back to Home</a>
+<div class="entry-table">
+    <div>
+        <h1 class="entry-title" th:text="${'Topic Name: ' + topic.name}"></h1>
+    </div>
+    <div>
+        <p class="entry-title" th:text="${'Topic ID: ' + topic.id}"></p>
+    </div>
+    <div>
+        <a class="entry-title" th:href="@{/topics/list}">List All Topics</a>
+    </div>
+        <br>
+    <div>
+        <a th:href="@{/}">Back to Home</a>
+    </div>
+</div>
 </body>
 </html>
 
