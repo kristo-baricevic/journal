@@ -110,6 +110,7 @@ ul {
 .dropdown-add {
   position: relative;
   padding: 10px;
+  margin-top: 10px;
 }
 
 .dropdown-add .dropdown-content {
@@ -125,6 +126,8 @@ ul {
   background-color: #f9f9f9;
   min-width: 160px;
   z-index: 1;
+  right: 0;
+  left: auto;
 }
 
 .dropdown-add .dropdown-content a {
@@ -141,6 +144,7 @@ ul {
 .dropdown-edit {
   position: relative;
   padding: 10px;
+  margin-top: 10px;
 }
 
 .dropdown-edit .dropdown-content {
@@ -156,6 +160,8 @@ ul {
   background-color: #f9f9f9;
   min-width: 160px;
   z-index: 2;
+  right: 0;
+  left: auto;
 }
 
 .dropdown-edit .dropdown-content a {
@@ -170,8 +176,8 @@ ul {
 }
 
 .dropdown-analyze {
-  position: relative;
-  padding: 10px;
+    padding: 10px;
+    margin-top: 10px;
 }
 
 .dropdown-analyze .dropdown-content {
@@ -183,6 +189,8 @@ ul {
 }
 
 .dropdown-analyze:hover .dropdown-content {
+  right: 0;
+  left: auto;
   position: block;
   background-color: #f9f9f9;
   min-width: 160px;
@@ -273,7 +281,8 @@ ul {
     height: 40px;
     width: 80px;
     font-size: 16px;
-    border: 2px solid white
+    border: 2px solid white;
+    padding: 3px;
 }
 
 /* Responsive Navbar */
@@ -329,7 +338,7 @@ ul {
 }
 
 .dropdown-analyze .dropdown-content {
-    left: -50px;
+    left: -40px;
 }
 .dropdown {
     position: relative;
@@ -481,7 +490,13 @@ ul {
   }
 
 @media screen and (max-width: 450px) {
-
+    .navbar .login {
+      margin-right: 0px;
+      padding: 5px;
+    }
+    .dropdown-add, .dropdown-edit, .dropdown-analyze {
+      padding: 5px;
+    }
 }
 
 

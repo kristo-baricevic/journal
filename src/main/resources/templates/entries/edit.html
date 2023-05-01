@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+
 <body>
-<div th:replace="fragments :: page-header"></div>
-<div class="container">
+  <div th:replace="fragments :: page-header"></div>
+
   <div>
-    <h1>Edit Mood</h1>
+  <div>
+    <h1>Edit Entry</h1>
   </div>
-  <div>
+  <div class="container">
     <form th:action="@{/entries/edit/{id}(id=${entry.id})}" method="post" style="max-width:600px;">
       <div class="form-group">
-        <label th:for="name">Entry Title</label>
+        <label class="entry-title" th:for="name">Entry Title</label>
         <input class="form-control" th:value="${entry.title}" name="title" />
         <span th:errors="${entry.title}" class="error"></span>
       </div>
 
+      <div class="form-group">
+        <label th:for="topic">Entry Topic</label>
+        <input class="form-control" th:value="${entry.topic}" name="topic" />
+        <span th:errors="${entry.topic}" class="error"></span>
+      </div>
+
+      <div class="form-group">
+        <label th:for="mood">Entry Mood</label>
+        <input class="form-control" th:value="${entry.mood}" name="mood" />
+        <span th:errors="${entry.mood}" class="error"></span>
+      </div>
 
   <div class="form-group">
     <label th:for="entry">What would you like to write about?</label>
-    <textarea class="form-control" rows="20" cols="100" th:field="${entry.journalEntry}" name="journalEntry" />
+    <textarea class="add-form-control" rows="20" cols="100" th:field="${entry.journalEntry}" name="journalEntry" />
     <span th:errors="${entry.journalEntry}" class="error"></span>
   </div>
 
