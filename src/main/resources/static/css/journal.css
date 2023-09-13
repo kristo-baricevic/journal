@@ -236,38 +236,46 @@ ul {
   }
 
 .entry-heading {
-  background-color: #D3D3D3;
-  font-size: 24px;
-  font-weight: bold;
-  margin-top:10px;
-  margin-bottom: 10px;
+    background-color: #D3D3D3;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-top:10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .entry-table {
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  text-align: center;
-  margin: auto;
-}
-
-.entry {
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
-  padding: 20px;
+    display: flex;
+    text-align: center;
+    gap: 20px;
+    padding: 20px;
+    border-collapse: separate;
+    border-spacing: 0 2em;
 }
 
 .entry-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.table-body {
+}
+
+.entry-main {
 }
 
 .entry-body {
-  font-size: 16px;
-  padding: 5px;
-  border-bottom: 8px solid #FFD3F3;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.entry-text {
+    font-size: 14px;
+    padding: 10px;
+    text-justify: left;
 }
 
 .form-input {
