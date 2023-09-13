@@ -35,13 +35,14 @@ ul {
 .navbar-toprow {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .navbar-row2 {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .navbar a {
@@ -247,8 +248,6 @@ ul {
 .entry-table {
     display: flex;
     text-align: center;
-    gap: 20px;
-    padding: 20px;
     border-collapse: separate;
     border-spacing: 0 2em;
 }
@@ -275,7 +274,7 @@ ul {
 .entry-text {
     font-size: 14px;
     padding: 10px;
-    text-justify: left;
+    text-align: left;
 }
 
 .form-input {
@@ -285,8 +284,8 @@ ul {
 .btn-primary {
     background-color: black;
     color: white;
-    border-radius: 4px;
-    height: 40px;
+    border-radius: 10px;
+    height: 30px;
     width: 80px;
     font-size: 16px;
     border: 2px solid white;
@@ -341,8 +340,8 @@ ul {
 .form-control
 {
     max-width: 80%;
-    height: 46px;
-    font-size: 16px;
+    height: 30px;
+    font-size: 12px;
 }
 
 .dropdown-analyze .dropdown-content {
