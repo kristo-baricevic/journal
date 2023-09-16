@@ -248,6 +248,7 @@ ul {
 .entry-table {
     display: flex;
     text-align: center;
+    justify-content: center;
     border-collapse: separate;
     border-spacing: 0 2em;
 }
@@ -257,16 +258,36 @@ ul {
     font-weight: bold;
 }
 
-
-.table-body {
+.mood-container {
+    display: flex;
+    text-align: center;
+    justify-content: center;
 }
 
-.entry-main {
+.mood-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    background-color: white;
+    min-width: 200px;
+    min-height: 400px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.mood-name {
+
+}
+
+.mood-meaning {
+
 }
 
 .entry-body {
     background-color: white;
     padding: 10px;
+    max-width: 600px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

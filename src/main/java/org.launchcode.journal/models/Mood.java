@@ -13,6 +13,10 @@ public class Mood extends AbstractEntity{
     @Size(min=3, max=50)
     private String name;
 
+
+    @Size(min=3, max=200)
+    private String meaning;
+
     @OneToMany(mappedBy = "mood")
     private List<Entry> entries;
 
@@ -33,6 +37,14 @@ public class Mood extends AbstractEntity{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMeaning() {
+        return meaning;
+    }
+
+    public void setMeaning(String meaning) {
+        this.meaning = meaning;
     }
 
     @Override

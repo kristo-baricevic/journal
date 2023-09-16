@@ -4,15 +4,17 @@
 
 <body>
 <div th:replace="fragments :: page-header"></div>
-<div class="entry-table">
-    <div>
-        <h1 class="entry-title" th:text="${'Mood Name: ' + mood.name}"></h1>
-    </div>
-    <div>
-        <p class="entry-title" th:text="${'Mood ID: ' + mood.id}"></p>
-    </div>
-    <div>
-        <a th:href="@{/}">Back to Home</a>
+<div class="mood-container">
+    <div class="mood-card">
+        <div class="mood-name">
+            <h1 class="entry-title" th:text="${'Mood Name: ' + mood.name}"></h1>
+        </div>
+        <div class="mood-meaning">
+            <p class="mood-meaning" th:text="${'Meaning: ' + mood.meaning}"></p>
+        </div>
+        <div>
+            <a th:href="@{/}">Back to Home</a>
+        </div>
     </div>
 </div>
 </body>

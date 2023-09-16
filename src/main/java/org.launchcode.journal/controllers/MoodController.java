@@ -30,6 +30,7 @@ public class MoodController {
         model.addAttribute("mood", new Mood());
         model.addAttribute("pageTitle","Add mood");
         model.addAttribute("name","Add mood");
+        model.addAttribute("meaning","Add mood");
         return "moods/add";
     }
 
@@ -102,6 +103,7 @@ public class MoodController {
         Optional<Mood> mood = moodService.findByMoodId(id);
         if (mood != null) {
             model.addAttribute("name", "Mood: "+ mood.get().getName());
+            model.addAttribute("meaning", "Mood: "+ mood.get().getMeaning());
             model.addAttribute("mood", mood.get());
             return "moods/show";
         } else {
