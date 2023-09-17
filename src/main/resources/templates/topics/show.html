@@ -3,20 +3,15 @@
 <head th:replace="fragments :: head">
 </head>
 <body>
-<div th:replace="fragments :: page-header"></div>
-<div class="entry-table">
-    <div>
-        <h1 class="entry-title" th:text="${'Topic Name: ' + topic.name}"></h1>
-    </div>
-    <div>
-        <p class="entry-title" th:text="${'Topic ID: ' + topic.id}"></p>
-    </div>
-    <div>
-        <a class="entry-title" th:href="@{/topics/list}">List All Topics</a>
-    </div>
+<div class="mood-container">
+    <div class="mood-card">
+        <div class="mood-name">
+            <h1 class="entry-title" th:text="${'Topic Name: ' + topic.name}"></h1>
+        </div>
         <br>
-    <div>
-        <a th:href="@{/}">Back to Home</a>
+        <div>
+            <a th:href="@{/}">Back to Home</a>
+        </div>
     </div>
 </div>
 </body>

@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>    <meta charset="UTF-8">
+<script>
+        function displayTopicDetails() {
+            var selectedTopicId = document.getElementById("selectTopic").value;
+            if (selectedTopicId) {
+                // Load mood details from the "topics/show" endpoint
+                fetch("/topics/show/" + selectedTopicId)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("topicDetails").innerHTML = data;
+                });
+            }
+        }
+    </script>
+<body>
+<meta charset="UTF-8">
 <nav th:replace="fragments :: page-header"></nav>
-<div class="table-container">
-    <h1> List Topic </h1>
-    <br/>
-    <table class="entry-table">
-        <thead>
-        <tr class="heading-container">
-            <th class="entry-heading">Topic Name</th>
-            <th class="entry-heading">Action</th>
-        </tr>
-        </thead>
-        <div th:if="${message}" th:text="${message}"></div>
-        <tbody class="entry">
-        <th:block th:each="topic: ${listTopic}">
-            <tr>
-                <td><a th:href="@{'/topics/show/' + ${topic.id}}" th:text="${topic.name}"></a></td>
-                <td>
-                    <a  th:href="@{'/topics/edit/'+ ${topic.id}}">Edit</a>
-                    <form th:action="@{/topics/delete}" method="post">
-                        <input type="hidden" name="id" th:value="${topic.id}"/>
-                        <input type="submit" value="Delete"/>
-                    </form>
-                </td>
-            </tr>
-        </th:block>
-        </tbody>
-    </table>
-</div>
+
+    <div class="table-container">
+
+        <h1> List Topic </h1>
+        <br/>
+
+        <label for="selectTopic">Select Topic:</label>
+        <select id="selectTopic">
+            <option value="" disabled selected>Select a Topic</option>
+            <th:block th:each="topic: ${listTopic}">
+                <option th:value="${topic.id}" th:text="${topic.name}"></option>
+            </th:block>
+        </select>
+        <button onclick="displayTopicDetails()">Display Details</button>
+
+        <div id="topicDetails"></div>
+    </div>
+
 </body>
 </html>

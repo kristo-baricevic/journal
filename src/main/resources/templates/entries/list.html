@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>    <meta charset="UTF-8">
+<script>
+        function displayEntryDetails() {
+            console.log("test test");
+            var selectedEntryId = document.getElementById("selectEntry").value;
+            if (selectedEntryId) {
+                // Load mood details from the "entries/show" endpoint
+                fetch("/entries/show/" + selectedEntryId)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("entryDetails").innerHTML = data;
+                });
+            }
+        }
+    </script>
+<body>
+<meta charset="UTF-8">
+<nav th:replace="fragments :: page-header"></nav>
 
 <div class="table-container">
-    <title>Journal Entries</title>
-    <nav th:replace="fragments :: page-header"></nav>
-    <h1> Journal Entries </h1>
+
+    <h1> List Entries </h1>
     <br/>
-    <table class="entry-table">
-        <thead>
-        <tr class="heading-container">
-            <th class="entry-heading">Title</th>
-            <th class="entry-heading">Action</th>
-        </tr>
-        </thead>
-        <div th:if="${message}" th:text="${message}"></div>
-        <tbody class="entry">
+
+    <label for="selectEntry">Select Entry:</label>
+    <select id="selectEntry">
+        <option value="" disabled selected>Select a Entry</option>
         <th:block th:each="entry: ${listEntry}">
-            <tr>
-                <td><a th:href="@{'/entries/show/' + ${entry.id}}" th:text="${entry.title}"></a></td>
-                <td>
-                    <a  th:href="@{'/entries/edit/'+ ${entry.id}}">Edit</a>
-                    <form th:action="@{/entries/delete}" method="post">
-                        <input type="hidden" name="id" th:value="${entry.id}"/>
-                        <input type="submit" value="Delete"/>
-                    </form>
-                </td>
-            </tr>
+            <option th:value="${entry.id}" th:text="${entry.title}"></option>
         </th:block>
-        </tbody>
-    </table>
+    </select>
+    <button onclick="displayEntryDetails()">Display Details</button>
+
+    <div id="entryDetails"></div>
 </div>
+
 </body>
 </html>

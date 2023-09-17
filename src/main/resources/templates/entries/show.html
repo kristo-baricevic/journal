@@ -3,17 +3,20 @@
 <head th:replace="fragments :: head"></head>
 
 <body>
-<div th:replace="fragments :: page-header"></div>
 <div class="entry-table">
-    <div class="entry-heading">
-        <h1 th:text="${'Title: ' + entry.title}"></h1>
-    </div>
-    <div>
-        <p th:text="${'Entry: ' + entry.journalEntry}"></p>
-    </div>
-<br>
-    <div>
-        <a th:href="@{/}">Back to Home</a>
+    <div class="entry-main">
+        <div class="entry-body">
+            <div class="entry-heading">
+                <h1 class="entry-title" th:text="${entry.title}"></h1>
+            </div>
+            <div>
+                <p class="entry-text" th:text="${entry.journalEntry}"></p>
+            </div>
+                <br>
+            <div>
+                <a th:href="@{/}">Back to Home</a>
+            </div>
+        </div>
     </div>
 </div>
 </body>
