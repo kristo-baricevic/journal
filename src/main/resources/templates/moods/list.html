@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>    <meta charset="UTF-8">
-<nav th:replace="fragments :: page-header"></nav>
+    <script>
+        function displayMoodDetails() {
+            var selectedMoodId = document.getElementById("selectMood").value;
+            if (selectedMoodId) {
+                // Load mood details from the "moods/show" endpoint
+                fetch("/moods/show/" + selectedMoodId)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("moodDetails").innerHTML = data;
+                    });
+            }
+        }
+    </script>
+<body>
+    <meta charset="UTF-8">
+    <nav th:replace="fragments :: page-header"></nav>
 
-<div class="table-container">
+    <div class="table-container">
 
-    <h1> List Mood </h1>
-    <br/>
-    <table class="entry-table">
-        <thead>
-        <tr class="heading-container">
-            <th class="entry-heading">Mood Name</th>
-            <th class="entry-heading">Action</th>
-        </tr>
-        </thead>
-        <div th:if="${message}" th:text="${message}"></div>
-        <tbody class="entry">
-        <th:block th:each="mood: ${listMood}">
-            <tr>
-                <td><a th:href="@{'/moods/show/' + ${mood.id}}" th:text="${mood.name}"></a></td>
-                <td>
-                    <a  th:href="@{'/moods/edit/'+ ${mood.id}}">Edit</a>
-                    <form th:action="@{/moods/delete}" method="post">
-                        <input type="hidden" name="id" th:value="${mood.id}"/>
-                        <input type="submit" value="Delete"/>
-                    </form>
-                </td>
-            </tr>
-        </th:block>
-        </tbody>
-    </table>
+        <h1> List Mood </h1>
+        <br/>
 
-</div>
+        <label for="selectMood">Select Mood:</label>
+        <select id="selectMood">
+            <option value="" disabled selected>Select a Mood</option>
+            <th:block th:each="mood: ${listMood}">
+                <option th:value="${mood.id}" th:text="${mood.name}"></option>
+            </th:block>
+        </select>
+        <button onclick="displayMoodDetails()">Display Details</button>
 
-
-</center>
+        <div id="moodDetails"></div>
+    </div>
 </body>
 </html>

@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         scrollPos = currentTop;
     });
-})
+});
 
 $(document).ready(function() {
     $('.dropdown-toggle').dropdown();

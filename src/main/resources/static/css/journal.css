@@ -247,6 +247,7 @@ ul {
 
 .entry-table {
     display: flex;
+    flex-direction: column;
     text-align: center;
     justify-content: center;
     border-collapse: separate;
@@ -262,6 +263,7 @@ ul {
     display: flex;
     text-align: center;
     justify-content: center;
+    padding: 30px;
 }
 
 .mood-card {
