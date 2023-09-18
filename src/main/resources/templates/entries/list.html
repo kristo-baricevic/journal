@@ -3,7 +3,6 @@
 <head th:replace="fragments :: head"></head>
 <script>
         function displayEntryDetails() {
-            console.log("test test");
             var selectedEntryId = document.getElementById("selectEntry").value;
             if (selectedEntryId) {
                 // Load mood details from the "entries/show" endpoint
@@ -14,7 +13,7 @@
                 });
             }
         }
-    </script>
+</script>
 <body>
 <meta charset="UTF-8">
 <nav th:replace="fragments :: page-header"></nav>

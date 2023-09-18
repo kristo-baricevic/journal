@@ -2,45 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
 </head>
-<body>    <meta charset="UTF-8">
+<body>
+<meta charset="UTF-8">
 <div>
     <title>List Entries By Topic</title>
     <div th:replace="fragments :: page-header"></div>
     <div>
         <div>
-            <h1> List Entries By Topic </h1>
+            <h1>List Entries By Topic</h1>
+        </div>
+        <div>
+            <!-- Drop-down menu for selecting a topic -->
+            <label for="selectTopic">Select a Topic:</label>
+            <select id="selectTopic" onchange="filterEntriesByTopic()">
+                <option value="" disabled selected>Select a Topic</option>
+                <th:block th:each="topic: ${topics}">
+                    <option th:value="${topic.id}" th:text="${topic.name}"></option>
+                </th:block>
+            </select>
         </div>
         <div>
             <table class="entry-table">
-                <thead class="heading-container">
-                    <tr>
-                        <th class="entry-heading">Topic Name</th>
-                        <th class="entry-heading">Entries</th>
+                <tbody>
+                <div th:if="${message}" th:text="${message}"></div>
+                <th:block th:each="topic: ${topics}">
+                    <tr data-topic-id="${topic.id}" class="entry-row" th:style="${!topic.entries.empty} ? '' : 'display: none;'">
+                        <td class="entry-title">
+                            <a th:href="@{'/topics/show/' +${topic.id}}" th:text="${topic.name}"></a>
+                        </td>
+                        <td>
+                            <th:block th:if="${not topic.entries.empty}">
+                                <ul>
+                                    <li class="no-bullets-list" th:each="entry : ${topic.entries}" th:classappend="${'entry entry-' + entry.id}">
+                                        <a th:href="@{'/entries/show/' + ${entry.id}}" th:text="${entry.title}"></a>
+                                    </li>
+                                </ul>
+                            </th:block>
+                        </td>
                     </tr>
-                </thead>
-            <div th:if="${message}" th:text="${message}"></div>
-                <tbody class="entry">
-                    <th:block th:each="topic: ${topics}">
-                        <tr>
-                            <td>
-                                <a th:href="@{'/topics/show/' +${topic.id}}" th:text="${topic.name}"></a>
-                            </td>
-                            <td>
-                                <th:block th:if="${not topic.entries.empty}">
-                                    <ul>
-                                        <li class="no-bullets-list" th:each="entry : ${topic.entries}">
-                                            <a th:href="@{'/entries/show/' + ${entry.id}}" th:text="${entry.title}"></a>
-                                        </li>
-                                    </ul>
-                                </th:block>
-                            </td>
-                        </tr>
-                    </th:block>
+                </th:block>
                 </tbody>
             </table>
         </div>
     </div>
+</div>
+<!-- JavaScript function to filter entries by topic -->
+<script>
+    function filterEntriesByTopic() {
+        console.log("test");
+        var selectedTopic = document.getElementById("selectTopic").value;
+        var entriesContainer = document.querySelector(".entry-table tbody");
+
+        console.log("selectedTopic", selectedTopic);
+
+        // Clear existing rows
+        entriesContainer.innerHTML = "";
+
+        // Fetch and render entries based on the selected topic
+        fetch("/list/topic/" + selectedTopic)
+            .then(response => response.text()) // Assuming HTML response
+            .then(html => {
+            // Create a temporary element to parse the HTML response
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+
+            // Extract the entries
+            const entries = Array.from(temp.querySelectorAll('.entry')); // Adjust the selector as needed
+
+            // Handle the list of entries here
+            console.log(entries);
+            // Update the DOM with the entries as needed
+            entries.forEach(entry => {
+                entriesContainer.appendChild(entry);
+            });
+        })
+       .catch(error => {
+            console.error("Error fetching entries:", error);
+        });
+    }
+</script>
 </body>
 </html>
-
-

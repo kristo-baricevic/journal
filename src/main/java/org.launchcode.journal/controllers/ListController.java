@@ -74,7 +74,7 @@ public class ListController {
         return "journal_entries/list";
     }
 
-    @RequestMapping(value = "topic/{name}")
+    @RequestMapping(value = "topic/{name}", produces = "application/json")
     public String listEntriesByTopic(Model model, @PathVariable String name) {
         Iterable<Topic> entries = entryRepository.findByTopicName(name);
         model.addAttribute("entries", entries);

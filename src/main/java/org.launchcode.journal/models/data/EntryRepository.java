@@ -21,4 +21,5 @@ public interface EntryRepository extends JpaRepository<Entry, Integer> {
     public ArrayList<Entry> findAllByIdIn(ArrayList<Integer> ids);
     Iterable<Topic> findByTopicName(String name);
     Iterable<Mood> findByMoodName(String name);
+
 }
