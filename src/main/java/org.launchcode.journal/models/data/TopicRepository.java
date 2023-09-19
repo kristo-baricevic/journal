@@ -15,5 +15,4 @@ import java.util.Optional;
 public interface TopicRepository extends JpaRepository<Topic,Integer> {
     public long countById(Integer id);
     public Optional<Topic> findById (Integer id);
-    List<Entry> findAllByEntries_Topic_Id(Integer id);
 }

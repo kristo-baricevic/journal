@@ -49,25 +49,31 @@
 <!-- JavaScript function to filter entries by topic -->
 <script>
     function filterEntriesByTopic() {
-        console.log("test");
         var selectedTopic = document.getElementById("selectTopic").value;
         var entriesContainer = document.querySelector(".entry-table tbody");
 
+        selectedTopic = parseInt(selectedTopic, 10);
         console.log("selectedTopic", selectedTopic);
+
+        if (isNaN(selectedTopic)) {
+            console.error("Selected topic is not a valid integer.");
+            return;
+        }
 
         // Clear existing rows
         entriesContainer.innerHTML = "";
 
+
         // Fetch and render entries based on the selected topic
         fetch("/list/topic/" + selectedTopic)
-            .then(response => response.text()) // Assuming HTML response
+            .then(response => response.text())
             .then(html => {
             // Create a temporary element to parse the HTML response
             const temp = document.createElement('div');
             temp.innerHTML = html;
 
             // Extract the entries
-            const entries = Array.from(temp.querySelectorAll('.entry')); // Adjust the selector as needed
+            const entries = Array.from(temp.querySelectorAll('.entry'));
 
             // Handle the list of entries here
             console.log(entries);

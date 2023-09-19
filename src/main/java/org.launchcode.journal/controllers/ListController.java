@@ -12,13 +12,12 @@ import org.launchcode.journal.models.data.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -74,12 +73,19 @@ public class ListController {
         return "journal_entries/list";
     }
 
-    @RequestMapping(value = "topic/{name}", produces = "application/json")
-    public String listEntriesByTopic(Model model, @PathVariable String name) {
-        Iterable<Topic> entries = entryRepository.findByTopicName(name);
-        model.addAttribute("entries", entries);
-        model.addAttribute("title", "Entries in topic: " + name);
-        return "topics/list";
+    @GetMapping(value = "topic/{id}")
+    public String listEntriesByTopic(Model model, @PathVariable Integer id) {
+        Optional<Topic> optionalTopic = topicRepository.findById(id);
+
+        if (optionalTopic.isPresent()) {
+            // Topic found
+            Topic topic = optionalTopic.get();
+            Iterable<Entry> entries = topic.getEntries(); // Access associated entries
+            model.addAttribute("entries", entries);
+            return "topics/list";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @RequestMapping(value = "mood/{name}")
@@ -89,6 +95,4 @@ public class ListController {
         model.addAttribute("title", "Entries in mood: " + name);
         return "moods/list";
     }
-
-
 }

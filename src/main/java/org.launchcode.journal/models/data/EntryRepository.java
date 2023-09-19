@@ -15,11 +15,10 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface EntryRepository extends JpaRepository<Entry, Integer> {
-//    Iterable<Entry> findAll();
     public long countById(Integer id);
     public Optional<Entry> findById (Integer id);
     public ArrayList<Entry> findAllByIdIn(ArrayList<Integer> ids);
-    Iterable<Topic> findByTopicName(String name);
+    Iterable<Topic> findByTopicId(Integer id);
     Iterable<Mood> findByMoodName(String name);
 
 }
