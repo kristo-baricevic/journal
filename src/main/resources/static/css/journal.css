@@ -39,7 +39,6 @@ ul {
 }
 
 .navbar-row2 {
-  padding: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -235,11 +234,23 @@ ul {
 
 }
 
+.search-lower-row {
+    padding: 5px;
+}
+
+.wordcloud-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .wordcloud-page-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 80%;
 }
 
 .wordcloud-paragraph {
@@ -257,10 +268,14 @@ ul {
 
 
 .wordcloud-buffer {
+    display: flex;
     padding: 20px;
 }
 
 .wordcloud-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     max-width: 100%;
     height: auto;
@@ -280,10 +295,11 @@ ul {
 
 .entry-heading {
     background-color: #D3D3D3;
+    min-width: 300px;
     font-size: 24px;
     font-weight: bold;
     border-radius: 10px;
-    margin-top:10px;
+    margin-top: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
