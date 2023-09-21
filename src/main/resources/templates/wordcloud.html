@@ -50,23 +50,36 @@
 </script>
 
 <div>
-  <h1>Generate Word Cloud</h1>
+  <h2 class="entry-heading">Generate WordCloud</h2>
 </div>
-  <div clas="wordcloud-page-container">
+
+  <div class="wordcloud-page-container">
+
+    <div class="wordcloud-paragraph">
+      <div style="padding: 5px">
+        <p>Select a dream and click the button to discover what words appeared the most!</p>
+      </div>
+      <div style="padding: 5px">
+        <p>Select multiple dreams to see if there is any overlap!</p>
+      </div>
+    </div>
+
     <div class="wordcloud-options-container" >
       <form class="form-group" method="post" th:action="@{/wordcloud}">
-        <div th:each="entry : ${entries}">
+        <div style="padding: 5px;" th:each="entry : ${entries}">
           <label>
             <input type="checkbox" th:name="entryIds[]" th:value="${entry.id}">
             <span th:text="${entry.title}"></span>
           </label><br>
         </div>
-        <button type="submit">Generate</button>
+        <button class="btn-primary" style="margin-top: 10px;" type="submit">Generate</button>
       </form>
     </div>
   </div>
-  <div id="wordcloud-container" style="display:none">
-    <img style="border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);" id="word_cloud_image" src="">
+  <div class="wordcloud-buffer">
+    <div id="wordcloud-container" style="display:none">
+      <img style="border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);" id="word_cloud_image" src="">
+    </div>
   </div>
 </div>
 </body>
