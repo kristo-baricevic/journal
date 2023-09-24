@@ -33,7 +33,14 @@
             // Display analysis results
             $('#analysis_results').empty();
             $.each(response, function(index, analysisResult) {
-              $('#analysis_results').append('<h3>' + analysisResult.title + '</h3><p>' + analysisResult.result + '</p>');
+                $('#analysis_results').append(
+                '<div class="entry-main">' +
+                  '<div class="entry-body">' +
+                    '<h2 class="entry-heading">' + analysisResult.title + '</h2>' +
+                    '<div class="entry-text">' + analysisResult.result + '</div>' +
+                  '</div>' +
+                '</div>'
+                );
             });
             $('#analysis_results_container').show();
             $('#analysis-submit-button').removeAttr('disabled');
@@ -95,7 +102,7 @@
             <div class="wordcloud-options-container" >
 
                 <form class="form-group" method="post" th:action="@{/analysis}" id="analysis-data-form">
-                    <div th:each="entry : ${entries}">
+                    <div style="padding: 5px;" th:each="entry : ${entries}">
                         <label>
                             <input type="checkbox" th:name="entryIds[]" th:value="${entry.id}">
                             <span th:text="${entry.title}"></span>
@@ -118,6 +125,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 </body>

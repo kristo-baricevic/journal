@@ -296,8 +296,9 @@ ul {
 .entry-heading {
     background-color: #D3D3D3;
     min-width: 300px;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
+    padding: 5px;
     border-radius: 10px;
     margin-top: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -322,6 +323,7 @@ ul {
 
 .entry-main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
@@ -360,6 +362,8 @@ ul {
 }
 
 .entry-body {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     align-items: center;
     justify-content: center;
