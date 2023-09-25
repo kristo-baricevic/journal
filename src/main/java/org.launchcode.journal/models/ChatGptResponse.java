@@ -3,7 +3,7 @@ package org.launchcode.journal.models;
 
 import java.util.List;
 
-public class ChatGtpResponse {
+public class ChatGptResponse {
 
     private List<Choice> choices;
 
