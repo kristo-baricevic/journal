@@ -2,5 +2,8 @@
   "devDependencies": {
     "stylelint": "^15.5.0",
     "stylelint-config-standard-scss": "^8.0.0"
+  },
+  "dependencies": {
+    "openai": "^4.10.0"
   }
 }
