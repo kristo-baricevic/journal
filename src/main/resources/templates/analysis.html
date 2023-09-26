@@ -9,77 +9,50 @@
   <title>Entry Analysis</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-    $(document).ready(function() {
-    $('#analysis-data-form').submit(function(event) {
-      event.preventDefault();
-      $('#analysis-submit-button').attr('disabled', 'disabled');
-      function generate_analysis(selected_entries, analysisType, options) {
 
-        // Create analysis request object
-        var analysisRequest = {
-            entryIds: selected_entries,
-            analysisType: analysisType,
-            options: options
-        };
+    function handleClick(){
 
-        // Make AJAX request to server
-        $.ajax({
-          url: '/analysis',
-          method: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify(analysisRequest),
-          success: function(response) {
+        console.log("test interpret");
 
-            // Display analysis results
-            $('#analysis_results').empty();
-            $.each(response, function(index, analysisResult) {
-                $('#analysis_results').append(
-                '<div class="entry-main">' +
-                  '<div class="entry-body">' +
-                    '<h2 class="entry-heading">' + analysisResult.title + '</h2>' +
-                    '<div class="entry-text">' + analysisResult.result + '</div>' +
-                  '</div>' +
-                '</div>'
-                );
-            });
-            $('#analysis_results_container').show();
-            $('#analysis-submit-button').removeAttr('disabled');
-          },
-          error: function() {
-              $('#analysis_results').html('<p>An error occurred while generating the analysis</p>');
-              $('#analysis_results_container').show();
-              $('#analysis-submit-button').removeAttr('disabled');
-            }
-        });
-      }
+        // Get selected entry
+        var selected_entry = $('input:checked').val();
 
-        // Get selected entries
-        var selected_entries = $('input:checked').map(function() {
-          return $(this).val();
-        }).get();
+
+        console.log("selected entry", selected_entry);
 
         // Convert array of strings to array of integers
-        selected_entries = selected_entries.map(function(entry) {
-          return parseInt(entry);
+        selected_entry = parseInt(selected_entry);
+
+
+        $.ajax({
+              url: '/api/v1/ask',
+              method: 'POST',
+              contentType: 'application/json; charset=utf-8',
+              data: JSON.stringify({ entryId: selected_entry }),
+              success: function(response) {
+
+                // Display analysis results
+                $('#analysis_results').empty();
+                $.each(response, function(index, analysisResult) {
+                    $('#analysis_results').append(
+                    '<div class="entry-main">' +
+                      '<div class="entry-body">' +
+                        '<h2 class="entry-heading">' + analysisResult.title + '</h2>' +
+                        '<div class="entry-text">' + analysisResult.result + '</div>' +
+                      '</div>' +
+                    '</div>'
+                    );
+                });
+                $('#analysis_results_container').show();
+                $('#analysis-submit-button').removeAttr('disabled');
+              },
+              error: function() {
+                  $('#analysis_results').html('<p>An error occurred while generating the analysis</p>');
+                  $('#analysis_results_container').show();
+                  $('#analysis-submit-button').removeAttr('disabled');
+              }
         });
-
-        // Get selected analysis options
-        var options = {};
-        $('input[type="checkbox"]:checked').each(function() {
-          options[$(this).val()] = true;
-        });
-
-        // Get selected analysis type
-        var analysisType = $('#analysisType').val();
-
-        var options = {};
-        $('input[type="checkbox"]:checked').each(function() {
-          options[$(this).val()] = true;
-        });
-
-        generate_analysis(selected_entries, analysisType, options);
-      });
-    });
+    }
 
     </script>
     <div class="wordcloud-page">
@@ -94,28 +67,23 @@
                 <div style="padding: 5px">
                     <p>Select a dream and choose your analysis type</p>
                 </div>
-                <div style="padding: 5px">
-                    <p>Select multiple dreams to see if there is any overlap!</p>
-                </div>
             </div>
 
-            <div class="wordcloud-options-container" >
+            <div class="wordcloud-options-container">
 
-                <form class="form-group" method="post" th:action="@{/analysis}" id="analysis-data-form">
-                    <div style="padding: 5px;" th:each="entry : ${entries}">
-                        <label>
-                            <input type="checkbox" th:name="entryIds[]" th:value="${entry.id}">
-                            <span th:text="${entry.title}"></span>
-                        </label><br>
+                <form class="form-group" method="post" th:action="@{/api/v1/ask}" id="analysis-data-form">
+                    <div style="padding: 5px;">
+                        <label for="selectedEntry">Select a dream:</label>
+                        <select id="selectedEntry" name="entryId">
+                            <option value="" disabled selected>Select a dream</option>
+                            <th:block th:each="entry : ${entries}">
+                                <option th:value="${entry.id}" th:text="${entry.title}"></option>
+                            </th:block>
+                        </select>
                     </div>
-                    <label for="analysisType">Analysis Type:</label>
-                    <select id="analysisType" name="analysisType">
-                        <option value="interpretation">DreamGPT Interpretation</option>
-                        <option value="sentimentAnalysis">Sentiment Analysis</option>
-                        <option value="namedEntities">Named Entities</option>
-                        <option value="keyPhrases">Key Phrases</option>
-                    </select>
-                    <button class="btn-primary" id="analysis-submit-button" type="submit">Analyze</button>
+                    <div>
+                        <button class="btn-primary" id="interpretation-button" onclick="handleClick()">Interpret</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -126,6 +94,7 @@
             </div>
         </div>
     </div>
+
 
 </div>
 

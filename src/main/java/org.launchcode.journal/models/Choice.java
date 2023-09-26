@@ -2,13 +2,20 @@ package org.launchcode.journal.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class Choice {
 
-    @JsonProperty("index")
     private int index;
-    @JsonProperty("message")
     private Message message;
 
+    public Choice() {
+    }
+
+    public Choice(int index, Message message) {
+        this.index = index;
+        this.message = message;
+    }
 
     public int getIndex() {
         return index;
@@ -26,5 +33,23 @@ public class Choice {
         this.message = message;
     }
 
+    @Override
+    public String toString() {
+        return "Choice{" +
+                "message=" + message +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Choice choice = (Choice) o;
+        return index == choice.index && Objects.equals(message, choice.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, message);
+    }
 }

@@ -1,11 +1,13 @@
 package org.launchcode.journal;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -19,6 +21,22 @@ public class JournalApplication {
 	public static void main(String[] args) {
 		System.out.println(System.getProperty("java.class.path"));
 		SpringApplication.run(JournalApplication.class, args);
+	}
+
+	@Value("${openai.key}")
+	private String apiKey;
+
+	@Bean
+	public RestTemplate template() {
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		restTemplate.getInterceptors().add( (request, body, execution) -> {
+			request.getHeaders().add("Authorization", "Bearer " + apiKey);
+			return execution.execute(request, body);
+		});
+
+		return restTemplate;
 	}
 
 	@Bean

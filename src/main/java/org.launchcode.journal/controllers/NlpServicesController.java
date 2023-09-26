@@ -58,40 +58,6 @@ public class NlpServicesController {
             for (Entry entry : entries) {
                 String result;
                 switch (analysisType) {
-                    case "interpretation":
-                        // Define the API URL
-                        String apiUrl = "https://api.openai.com/v1/chat/completions";
-
-                        // Set your OpenAI API key
-                        String apiKey = "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";
-
-                        // Create an instance of RestTemplate
-                        RestTemplate restTemplate = new RestTemplate();
-
-                        // Create headers with the Content-Type and Authorization
-                        HttpHeaders headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.set("Authorization", "Bearer " + apiKey);
-
-                        // Create the request body with the user's question
-                        String entryText = entry.getJournalEntry();
-                        String requestBody = "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"" + "Please interpret the following dream: " + entryText + "\"}]}";
-                        // Create an HttpEntity with headers and the request body
-                        HttpEntity<String> httpEntity = new HttpEntity<>(requestBody, headers);
-                        System.out.println("http entity" + httpEntity);
-
-                        // Send the POST request and retrieve the response
-
-                        ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, httpEntity, String.class);
-
-                        int responseCode = response.getStatusCodeValue();
-
-                        String responseBody = response.getBody();
-                        System.out.println("Response Status Code: " + responseCode);
-                        System.out.println("Response JSON: " + responseBody);
-
-                        analysisResults.add(new AnalysisResult(entry.getTitle(), responseBody, "interpretation"));
-                        break;
                     case "sentimentAnalysis":
                         result = nlpService.getSentiment(entry.getJournalEntry());
                         analysisResults.add(new AnalysisResult(entry.getTitle(), result, "sentimentAnalysis"));
