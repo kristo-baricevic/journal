@@ -21,7 +21,7 @@ public class ChatGptController {
         String apiUrl = "https://api.openai.com/v1/chat/completions";
 
         // Set your OpenAI API key
-        String apiKey = "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";
+        String apiKey = "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";
 
         // Create an instance of RestTemplate
         RestTemplate restTemplate = new RestTemplate();
