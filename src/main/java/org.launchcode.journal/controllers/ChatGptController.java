@@ -1,38 +1,48 @@
 package org.launchcode.journal.controllers;
 
-import org.launchcode.journal.models.ChatGptRequest;
-import org.launchcode.journal.models.ChatGptResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-@RestController
-@RequestMapping("/api/v1")
+@Controller
 public class ChatGptController {
 
-    @Value("${chatgpt.model}")
-    private String model;
+    @RequestMapping(value = "/api/v1/ask", method = RequestMethod.POST)
+    @ResponseBody
+    public String askQuestion(@RequestParam String userQuestion) {
+        // Define the API URL
+        String apiUrl = "https://api.openai.com/v1/chat/completions";
 
-    @Value("${chatgpt.api.url}")
-    private String apiUrl;
+        // Set your OpenAI API key
+        String apiKey = "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";
 
-    @Value("${chatgpt.api.key}")
-    private String apiKey;
+        // Create an instance of RestTemplate
+        RestTemplate restTemplate = new RestTemplate();
 
-    private static RestTemplate restTemplate = new RestTemplate();
-
-    @RequestMapping(value = "/ask", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String ask(@RequestParam String query) {
-        ChatGptRequest request = new ChatGptRequest(model, query);
+        // Create headers with the Content-Type and Authorization
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer" +apiKey);
-        ChatGptResponse chatGptResponse = restTemplate.postForObject(apiUrl, new HttpEntity<>(request, headers), ChatGptResponse.class);
-        return chatGptResponse.getChoices().get(0).getMessage().getContent();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer " + apiKey);
+
+        // Create the request body with the user's question
+        String requestBody = "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"" + userQuestion + "\"}]}";
+
+        // Create an HttpEntity with headers and the request body
+        HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
+
+        // Send the POST request and retrieve the response
+        ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, entity, String.class);
+
+        // Extract and return the response body
+        String responseBody = response.getBody();
+
+        return responseBody;
     }
 }
