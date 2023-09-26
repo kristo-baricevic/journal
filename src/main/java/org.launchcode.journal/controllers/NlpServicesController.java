@@ -6,11 +6,14 @@ import org.launchcode.journal.models.*;
 import org.launchcode.journal.models.AnalysisResult;
 import org.launchcode.journal.models.data.EntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +58,32 @@ public class NlpServicesController {
             for (Entry entry : entries) {
                 String result;
                 switch (analysisType) {
+                    case "interpretation":
+                        // Define the API URL
+                        String apiUrl = "https://api.openai.com/v1/chat/completions";
+
+                        // Set your OpenAI API key
+                        String apiKey = "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";
+
+                        // Create an instance of RestTemplate
+                        RestTemplate restTemplate = new RestTemplate();
+
+                        // Create headers with the Content-Type and Authorization
+                        HttpHeaders headers = new HttpHeaders();
+                        headers.setContentType(MediaType.APPLICATION_JSON);
+                        headers.set("Authorization", "Bearer " + apiKey);
+
+                        // Create the request body with the user's question
+                        String requestBody = "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"" + "Please interpret the following dream: " + entry + "\"}]}";
+
+                        // Create an HttpEntity with headers and the request body
+                        HttpEntity<String> httpEntity = new HttpEntity<>(requestBody, headers);
+
+                        // Send the POST request and retrieve the response
+                        ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, httpEntity, String.class);
+                        String responseBody = response.getBody();
+                        analysisResults.add(new AnalysisResult(entry.getTitle(), responseBody.toString(), "interpretation"));
+                        break;
                     case "sentimentAnalysis":
                         result = nlpService.getSentiment(entry.getJournalEntry());
                         analysisResults.add(new AnalysisResult(entry.getTitle(), result, "sentimentAnalysis"));
