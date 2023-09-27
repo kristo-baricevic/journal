@@ -31,15 +31,23 @@ public class ChatGptController {
     @ResponseBody
     public String askQuestion(@RequestParam(name = "entryId") Integer entryId) {
 
+        System.out.println("did i get this far");
+
+
         Optional entry = entryRepository.findById(entryId);
 
         template = new RestTemplate();
 
-        String prompt = "Please interpret this dream: " + entry.toString();
+        String prompt = "Please say hello";
 
         ChatGptRequest chatGptRequest = new ChatGptRequest(model, prompt);
 
+        System.out.println(chatGptRequest);
+
+
         ChatGptResponse chatGPTResponse = template.postForObject(url, chatGptRequest, ChatGptResponse.class);
+
+        System.out.println("did i get THIS far");
 
         return chatGPTResponse.getChoices().get(0).getMessage().toString();
     }

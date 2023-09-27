@@ -14,7 +14,10 @@ public class ChatGptRequest {
 
     public ChatGptRequest (String model, String query ) {
         this.model = model;
+        System.out.println("query: " + query);
+        Message userMessage = new Message("user", query);
         this.messages.add(new Message("user", query));
+        System.out.println("Message: " + userMessage);
     }
 
     public String getModel() {

@@ -15,7 +15,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{}";
+        return "Message{role='" + role + "', content='" + content + "'}";
     }
 
     public String getRole() {

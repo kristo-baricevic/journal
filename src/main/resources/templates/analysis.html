@@ -17,7 +17,6 @@
         // Get selected entry
         var selected_entry = $('input:checked').val();
 
-
         console.log("selected entry", selected_entry);
 
         // Convert array of strings to array of integers
@@ -27,8 +26,7 @@
         $.ajax({
               url: '/api/v1/ask',
               method: 'POST',
-              contentType: 'application/json; charset=utf-8',
-              data: JSON.stringify({ entryId: selected_entry }),
+              data: 'entryId=' + selected_entry,
               success: function(response) {
 
                 // Display analysis results
