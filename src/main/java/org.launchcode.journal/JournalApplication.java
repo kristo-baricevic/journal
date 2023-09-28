@@ -28,13 +28,17 @@ public class JournalApplication {
 
 	@Bean
 	public RestTemplate template() {
-
+		System.out.println("inside the template");
 		RestTemplate restTemplate = new RestTemplate();
+
+		System.out.println(apiKey);
 
 		restTemplate.getInterceptors().add( (request, body, execution) -> {
 			request.getHeaders().add("Authorization", "Bearer " + apiKey);
 			return execution.execute(request, body);
 		});
+
+		System.out.println(restTemplate);
 
 		return restTemplate;
 	}

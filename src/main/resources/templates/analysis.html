@@ -1,99 +1,89 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-
 <body>
 
 <div th:replace="fragments :: page-header"></div>
 
-  <title>Entry Analysis</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-
-    function handleClick(){
-
+<title>Entry Analysis</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function handleSubmit(event) {
+        event.preventDefault();
         console.log("test interpret");
 
         // Get selected entry
         var selected_entry = $('input:checked').val();
 
-        console.log("selected entry", selected_entry);
+        var entryPrompt = "Please interpret a dream for me";
 
-        // Convert array of strings to array of integers
-        selected_entry = parseInt(selected_entry);
+        console.log("selected entry ", entryPrompt);
 
+           var requestData = {
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    {
+                        role: 'user',
+                        content: entryPrompt
+                    }
+                ]
+            };
 
         $.ajax({
-              url: '/api/v1/ask',
-              method: 'POST',
-              data: 'entryId=' + selected_entry,
-              success: function(response) {
+            url: 'http://localhost:8080/api/v1/bot/ask',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(requestData),
+            success: function(response) {
+                // Display the response in the entry-text div
+                $('.entry-text').text(response);
 
-                // Display analysis results
-                $('#analysis_results').empty();
-                $.each(response, function(index, analysisResult) {
-                    $('#analysis_results').append(
-                    '<div class="entry-main">' +
-                      '<div class="entry-body">' +
-                        '<h2 class="entry-heading">' + analysisResult.title + '</h2>' +
-                        '<div class="entry-text">' + analysisResult.result + '</div>' +
-                      '</div>' +
-                    '</div>'
-                    );
-                });
+                // Show the analysis results container
                 $('#analysis_results_container').show();
                 $('#analysis-submit-button').removeAttr('disabled');
-              },
-              error: function() {
-                  $('#analysis_results').html('<p>An error occurred while generating the analysis</p>');
-                  $('#analysis_results_container').show();
-                  $('#analysis-submit-button').removeAttr('disabled');
-              }
+            },
+            error: function() {
+                $('#analysis_results').html('<p>An error occurred while generating the analysis</p>');
+                $('#analysis_results_container').show();
+                $('#analysis-submit-button').removeAttr('disabled');
+            }
         });
     }
-
-    </script>
-    <div class="wordcloud-page">
-
-        <div>
-            <h2 class="entry-heading">Generate Analysis</h2>
+</script>
+<div class="wordcloud-page">
+    <div>
+        <h2 class="entry-heading">Generate Analysis</h2>
+    </div>
+    <div class="wordcloud-page-container">
+        <div class="wordcloud-paragraph">
+            <div style="padding: 5px">
+                <p>Select a dream and choose your analysis type</p>
+            </div>
         </div>
-
-        <div class="wordcloud-page-container">
-
-            <div class="wordcloud-paragraph">
-                <div style="padding: 5px">
-                    <p>Select a dream and choose your analysis type</p>
+        <div class="wordcloud-options-container">
+            <form class="form-group" method="post" id="analysis-data-form" onsubmit="handleSubmit(event)">
+                <div style="padding: 5px;">
+                    <label for="selectedEntry">Select a dream:</label>
+                    <select id="selectedEntry" name="prompt">
+                        <option value="" disabled selected>Select a dream</option>
+                        <th:block th:each="entry : ${entries}">
+                            <option th:value="${entry.journalEntry}" th:text="${entry.title}"></option>
+                        </th:block>
+                    </select>
                 </div>
-            </div>
-
-            <div class="wordcloud-options-container">
-
-                <form class="form-group" method="post" th:action="@{/api/v1/ask}" id="analysis-data-form">
-                    <div style="padding: 5px;">
-                        <label for="selectedEntry">Select a dream:</label>
-                        <select id="selectedEntry" name="entryId">
-                            <option value="" disabled selected>Select a dream</option>
-                            <th:block th:each="entry : ${entries}">
-                                <option th:value="${entry.id}" th:text="${entry.title}"></option>
-                            </th:block>
-                        </select>
-                    </div>
-                    <div>
-                        <button class="btn-primary" id="interpretation-button" onclick="handleClick()">Interpret</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="wordcloud-buffer">
-            <div id="analysis_results_container" style="display:none;">
-                <div id="analysis_results"></div>
-            </div>
+                <div>
+                    <button class="btn-primary" id="interpretation-button">Interpret</button>
+                </div>
+            </form>
         </div>
     </div>
-
-
+    <div class="wordcloud-buffer">
+        <div id="analysis_results_container" style="display:none;">
+            <div id="analysis_results"></div>
+        </div>
+    </div>
 </div>
 
 </body>

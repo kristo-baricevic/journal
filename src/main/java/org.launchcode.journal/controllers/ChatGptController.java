@@ -1,5 +1,6 @@
 package org.launchcode.journal.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.launchcode.journal.models.ChatGptResponse;
 import org.launchcode.journal.models.data.EntryRepository;
 import org.launchcode.journal.models.ChatGptRequest;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 
-import java.util.Optional;
+
 
 @Controller
+@RequestMapping("/api/v1/bot")
+@RequiredArgsConstructor
 public class ChatGptController {
 
     @Value("${openai.api.model}")
@@ -27,27 +30,20 @@ public class ChatGptController {
     @Autowired
     public EntryRepository entryRepository;
 
-    @RequestMapping(value = "/api/v1/ask", method = RequestMethod.POST)
+    @RequestMapping(value = "/ask", method = RequestMethod.POST)
     @ResponseBody
-    public String askQuestion(@RequestParam(name = "entryId") Integer entryId) {
+    public String askQuestion(@RequestBody ChatGptRequest chatGptRequest) {
+        System.out.println("Received request with prompt: " + chatGptRequest.getPrompt());
 
-        System.out.println("did i get this far");
 
-
-        Optional entry = entryRepository.findById(entryId);
+//        Optional entry = entryRepository.findById(entryId);
 
         template = new RestTemplate();
-
-        String prompt = "Please say hello";
-
-        ChatGptRequest chatGptRequest = new ChatGptRequest(model, prompt);
-
-        System.out.println(chatGptRequest);
 
 
         ChatGptResponse chatGPTResponse = template.postForObject(url, chatGptRequest, ChatGptResponse.class);
 
-        System.out.println("did i get THIS far");
+        System.out.println("response received");
 
         return chatGPTResponse.getChoices().get(0).getMessage().toString();
     }
